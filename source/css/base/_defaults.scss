@@ -1,0 +1,85 @@
+/* addition resets and defaults
+ * ====================================================================
+ */
+
+p, .content ol, .content ul, address {
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+ul ul,
+ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: disc;
+}
+ol ol {
+  list-style-type: inherit;
+}
+nav a {
+  display: block;
+  text-decoration: none;
+}
+figcaption {
+  font-size: em(14px, $base-fontsize);
+  line-height: 1.5;
+  margin: 1em 0;
+}
+
+address {
+  font-style: normal;
+}
+
+hr {
+  border: {
+    style: solid;
+    top: none;
+    left: none;
+    right: none;
+    bottom: 1px solid $grey;
+  };
+  width: 100%;
+  margin: 1em auto;
+}
+
+caption {
+  caption-side: bottom;
+}
+
+caption:before,
+caption:after {
+  content: "\0020\2014\0020";
+}
+
+th, td {
+  // border-bottom: 1px solid lighten($color-text, 80%);
+  padding: em(4px) 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  // border-bottom: 1px solid lighten($color-text, 60%);
+}
+
+table {
+  ul {
+    margin: 0;
+    padding-left: 1em;
+  }
+}
+
+figure > img {
+  display: block;
+  margin: 0 auto;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+}
+
+label {
+  cursor: pointer;
+}

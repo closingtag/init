@@ -1,0 +1,116 @@
+@import "base/font-stack";           // load font-stacks
+
+// compass global variables
+$experimental-support-for-khtml: false;
+$experimental-support-for-svg:   true;
+$legacy-support-for-ie6:         false;
+$legacy-support-for-ie7:         false;
+$legacy-support-for-ie8:         true;
+$old-ie:                         false !default;
+
+// additional variables
+$responsive:      true;       // responsive project
+$modernizr:       true;       // use modernizr for css
+
+// customers colors
+$color-brand1:    hsl(355, 95%, 45%)  !default; // red
+$color-brand2:    hsl(143, 100%, 28%) !default; // green
+$color-back:      hsl(38, 69%, 89%);
+
+// default colors
+$white:           white   !default;
+$black:           black   !default;
+$darkergrey:      #333    !default;
+$darkgrey:        #666    !default;
+$grey:            #999    !default;
+$lightgrey:       #ccc    !default;
+$lightergrey:     #f0f0f0 !default;
+
+// site wide colors
+$color-bg:        $white !default;
+$color-main:      $color-brand1 !default;
+$color-secondary: $color-brand2 !default;
+$color-text:      $black !default;
+
+$color-highlight: $color-brand1 !default;
+$color-alert:     red !default;
+$color-success:   #5da423 !default;
+$color-mark:      yellow !default;
+
+$color-bodyBg:    $color-bg !default;
+$color-headerBg:  $color-brand1 !default;
+$color-footerBg:  $black !default;
+
+// gradient colors
+$color-gradient1:         $lightgrey !default;
+$color-gradient2:         $lightergrey !default;
+
+// Headline colors
+$color-h1:    $black !default;
+$color-h2:    $black !default;
+$color-h3:    $black !default;
+$color-h4:    $black !default;
+$color-h5:    $black !default;
+$color-h6:    $black !default;
+
+// Link colors
+$link-color:  $color-brand2 !default;
+$link-colorV: $color-brand2 !default;
+$link-colorH: $color-brand2 !default;
+$link-colorF: $color-brand2 !default;
+$link-colorA: $color-brand2 !default;
+
+
+// Font settings
+$font-main:       sans-serif    !default; // $helvetica-font-stack
+$font-alternate:  serif         !default; // $cambria-font-stack
+$base-fontsize:   14px          !default;
+$base-lineheight: 1.5           !default;
+$base-height:     $base-fontsize * $base-lineheight !default;
+$font-icon:       'icomoon';
+$webfont:         true          !default;
+$font-din:        'DIN Next', $font-main !default;
+
+$h1-fontsize:     54px          !default;
+$h2-fontsize:     26px          !default;
+$h3-fontsize:     24px          !default;
+$h4-fontsize:     16px          !default;
+$h5-fontsize:     14px          !default;
+$h6-fontsize:     12px          !default;
+
+$giga-fontsize:  117px          !default;
+$mega-fontsize:   90px          !default;
+$kilo-fontsize:   72px          !default;
+$milli-fontsize:  10px          !default;
+$micro-fontsize:   9px          !default;
+
+$padding:         20px          !default;
+$indent-amount:   40px          !default;
+$radius:           8px          !default;
+
+$total-width:     100%          !default;
+$containerMin:     1px          !default;
+$containerMax:  1240px          !default;
+
+// global breakpoints
+$tiny:           320px          !default;
+$small:          480px          !default;
+$medium:         600px          !default;
+$large:         1024px          !default;
+$xlarge:        1280px          !default;
+$jsenhanced:     600px          !default;
+
+
+// global variables from Singularity
+@include add-grid(3);
+@include add-grid(6 at $medium);
+//@include add-grid(2.75 6.5 2.75 at $large);
+@include add-grid(12 at $large);
+
+@include add-gutter(1/3);
+@include add-gutter(.25 at $medium);
+@include add-gutter(.25 at $large);
+// @include add-gutter-style('split');
+
+$breakpoint-default-media: screen;
+$breakpoint-to-ems: true;

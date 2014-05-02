@@ -1,0 +1,238 @@
+/* forms
+ * ====================================================================
+ */
+
+// errors
+.error-container {
+  display: none;
+  margin: 0 0 1em;
+  padding: 1em;
+}
+
+label.error {
+  color: $color-alert;
+  em {
+
+  }
+}
+
+input.error {
+  border: 1px solid $color-alert;
+}
+
+// form defaults
+form {
+  ol, ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    clear: both;
+    padding: 0;
+  }
+}
+
+.full,
+.wide,
+.half,
+.small {
+  @include box-sizing(border-box);
+  float: left;
+  clear: none;
+
+  input {
+    @include box-sizing(border-box);
+    width: 100%
+  }
+}
+
+.full {
+  width: 100%;
+}
+.wide {
+  width: 73%;
+}
+.wide + .small {
+  margin-left: 4%;
+}
+.half {
+  width: 48%;
+}
+.half + .half {
+  margin-left: 4%;
+}
+.half:nth-child(2n) {
+  margin-left: 0;
+}
+.half.nl {
+  float: none;
+  clear: both;
+  margin-left: 0;
+}
+.small {
+  width: 23%;
+  font-size: 1em;
+}
+.small + .wide {
+  margin-left: 4%;
+}
+
+// input.input-tiny {
+//   width: 50px;
+// }
+// input.input-small {
+//   width: 100px;
+// }
+// input.input-medium {
+//   width: 150px;
+// }
+// input.input-large {
+//   width: 200px;
+// }
+// input.input-xlarge {
+//   width: 250px;
+// }
+// input.input-xxlarge {
+//   width: 300px;
+// }
+// input.input-full {
+//   width: 100%;
+// }
+
+input,
+textarea {
+  &::-webkit-input-placeholder {
+    color: $grey;
+  }
+  &:-moz-placeholder {
+    color: $grey;
+  }
+}
+
+fieldset {
+
+  fieldset {
+    margin: 0 2%;
+
+    &.options {
+      margin: 0 5% 2%;
+    }
+  }
+
+  &.options {
+    margin: 0 4%;
+  }
+  &.half + .half {
+    margin-left: 4%;
+  }
+
+  // sup {
+  //   font-size: 1.2em;
+  //   top: -0.2em;
+  //   cursor: help;
+  // }
+}
+
+label {
+  width: 36%;
+  float: left;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+  color: inherit;
+  position: relative;
+
+  .label {
+    @extend label;
+    display: block;
+    cursor: inherit;
+    text-align: right;
+
+    label {
+      float: none;
+      margin: 0;
+      width: auto;
+    }
+  }
+}
+
+//input[type="submit"]
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="password"],
+input[type="search"],
+input[type="button"],
+textarea,
+button {
+  width: 50%;
+  padding: 0.25em;
+  border: 1px solid $color-text;
+  color: $color-text;
+}
+
+input:focus {
+  border-color: $color-highlight;
+  @include box-shadow(0 0 5px $color-highlight);
+  color: $color-main;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  float: none;
+  display: inline-block;
+  text-align: left;
+  width: inherit;
+  vertical-align: text-top;
+  width: 96%;
+  margin: 0 0 0 0.5%;
+  padding: 0 0 0.5em;
+}
+
+input[type="checkbox"] + .label-wrapper,
+input[type="radio"] + .label-wrapper {
+  float: left;
+  display: inline;
+  text-align: left;
+  width: 94%;
+  margin-left: 2%;
+  padding-bottom: 0.5em;
+}
+
+textarea {
+  width: 100%;
+  @include box-sizing(border-box);
+}
+
+legend.label + input[type="checkbox"] {
+  margin: 0.5em 0 0;
+}
+
+select {
+  width: inherit;
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+  @include box-sizing(border-box);
+}
+
+option {
+  padding: 0;
+}
+
+.btn-toolbar {
+  @extend .cf;
+}
+

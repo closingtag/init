@@ -1,0 +1,66 @@
+
+// Helper for old syntax in linear-gradients
+// Return the corrected angle or position for a css gradient
+@function angle($deg) {
+	@if type-of($deg) == 'number' {
+		@return mod(abs($deg - 450), 360deg);
+	} @else {
+		$position: to + " ";
+		@each $pos in $deg {
+			$position: $position + opposite-position($pos) + " ";
+		}
+		@return $position;
+	}
+}
+
+@function helper-gradient-angle($direction) {
+	$old-direction: $direction;
+	$veryold-direction: $direction;
+
+	// New Syntax has to be evaluated to old one
+	@if $direction == "to bottom" {
+		$old-direction: "top";
+	} @else if $direction == "to right" {
+		$old-direction: "left";
+	} @else if $direction == "to top" {
+		$old-direction: "bottom";
+	} @else if $direction == "to left" {
+		$old-direction: "right";
+	} @else {
+		$old-direction: angle($direction);
+	}
+
+	// And also for very old syntax
+	@if $direction == "to bottom" {
+		$veryold-direction: "left top, left bottom";
+	} @else if $direction == "to right" {
+		$veryold-direction: "top left, bottom right";
+	} @else if $direction == "to top" {
+		$veryold-direction: "left bottom, left top";
+	} @else if $direction == "to left" {
+		$veryold-direction: "top right, bottom left";
+	} @else {
+		$veryold-direction: angle($direction);
+	}
+
+	@return $old-direction, $veryold-direction;
+}
+
+
+// Generates a linear gradient for a given element
+// Dependency: @function helper-gradient-angle;
+//
+// @include x-linear-gradient("to bottom", #ccc, #ddd, #bbb);
+//
+@mixin x-linear-gradient($direction: "to bottom", $from: #ccc, $to: #aaa, $fallback: #ccc) {
+	$directions: helper-gradient-angle($direction);
+	// Provide a fallback-color
+	background-color: $fallback;
+	// Cross-browser linear-gradients
+	background-image: -webkit-gradient(linear, unquote(nth($directions, 2)), from($from), to($to)); // Android 2.1-3.0
+	background-image: -webkit-linear-gradient(unquote(nth($directions, 1)), $from, $to);
+	//background-image: -moz-linear-gradient(unquote(nth($directions, 1)), $from, $to);
+	//background-image: -ms-linear-gradient(unquote(nth($directions, 1)), $from, $to);
+	//background-image: -o-linear-gradient(unquote(nth($directions, 1)), $from, $to);
+	background-image: linear-gradient(unquote($direction), $from, $to);
+}

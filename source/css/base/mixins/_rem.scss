@@ -1,0 +1,63 @@
+
+// simple rem-mixin
+@mixin rem($size: $base-fontsize, $property: 'font-size', $base: $base-fontsize) {
+	@if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8  {
+		#{$property}: strip-units($size) * 1px; // fallback for old browsers
+	}
+	#{$property}: (strip-units($size) / strip-units($base)) * 1rem;
+}
+
+// @mixin x-rem()
+//
+// a small mixin for easy use of rem with px as fallback
+// usage: @include x-rem(14px);
+// usage: @include x-rem(14px, font-size);
+// usage: @include x-rem(0 12px 2 1.2, margin);
+// usage: @include x-rem(1.5 24px, padding);
+//
+// thanks to Eric Meyer for https://github.com/ericam/susy
+// and Hans Christian Reinl for http://drublic.de/blog/rem-fallback-sass-less/
+//
+@mixin x-rem($values: $base-fontsize, $property: 'font-size', $base: $base-fontsize) {
+	// Create a couple of empty lists as output buffers.
+	$px-values: ();
+	$rem-values: ();
+	// Loop through the $values list
+	@each $value in $values {
+		// For each property value, if it's in rem or px, derive both rem and
+		// px values for it and add those to the end of the appropriate buffer.
+		// Ensure all pixel values are rounded to the nearest pixel.
+		@if $value == 0 or $value == 0px {
+			// 0 -- use it without a unit
+			$px-values: join($px-values, 0);
+			$rem-values: join($rem-values, 0);
+		} @else if type-of($value) == number and not unitless($value) and (unit($value) == px) {
+			// px value given - calculate rem value from base-font-size
+			$new-rem-value: $value / $base;
+			$px-values: join($px-values, round($value));
+			$rem-values: join($rem-values, #{$new-rem-value}rem);
+		} @else if type-of($value) == number and not unitless($value) and (unit($value) == "%") {
+			// % value given - don't add px or rem
+			$px-values: join($px-values, #{$value});
+			$rem-values: join($rem-values, #{$value});
+		} @else if $value == auto {
+			// auto - don't add px or rem
+			$px-values: join($px-values, auto);
+			$rem-values: join($rem-values, auto);
+		} @else {
+			// unitless value - use those directly as rem and calculate the px-fallback
+			$px-values: join($px-values, round($value * $base));
+			$rem-values: join($rem-values, #{$value}rem);
+		}
+	}
+
+	// output the converted rules
+	// #{$property}: $px-values; // maybe leave for Opera Mini
+	#{$property}: $rem-values;
+	// hand over to old-ie mixin (<IE9)
+	@if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8 {
+		@include old-ie {
+			#{$property}: $px-values;
+		}
+	}
+}

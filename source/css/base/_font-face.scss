@@ -1,0 +1,80 @@
+// including fonts for all browser IE > 8
+
+@if $old-ie == false {
+// @font-face {
+// 	font-family: 'DIN Next';
+// 	src: font-url("fonts/DIN-regular.woff") format("woff"),
+// 			 font-url("fonts/DIN-regular.ttf") format("ttf");
+
+// 	font-weight: 400;
+// 	font-style: normal;
+// }
+// @font-face {
+// 	font-family: 'DIN Next';
+// 	src: font-url("fonts/DIN-bold.woff") format("woff"),
+// 			 font-url("fonts/DIN-bold.ttf") format("ttf");
+
+// 	font-weight: 700;
+// 	font-style: normal;
+// }
+// @font-face {
+// 	font-family: 'DIN Next';
+// 	src: font-url("fonts/DIN-medium.woff") format("woff"),
+// 			 font-url("fonts/DIN-medium.ttf") format("ttf");
+
+// 	font-weight: 500;
+// 	font-style: normal;
+// }
+	// @include font-face('DIN Next',
+	// 	//font-files('fonts/DIN-regular.woff', woff,'DIN-regular.ttf', ttf),
+	// 	font-files("fonts/DIN-regular.woff", "fonts/DIN-regular.ttf"),
+	// 	false,
+	// 	400,
+	// 	normal);
+
+	// @include font-face('DIN Next',
+	// 	font-files('fonts/DIN-bold.woff', woff,'DIN-bold.ttf', ttf),
+	// 	false,
+	// 	700,
+	// 	normal);
+
+	// @include font-face('DIN Next',
+	// 	font-files('fonts/DIN-medium.woff', woff,'DIN-medium.ttf', ttf),
+	// 	false,
+	// 	500,
+	// 	normal);
+}
+
+// include files for IE <9
+@else {
+	// DIN
+	// @font-face {
+	// 	font-family: 'DIN-Next-Regular';
+	// 	src: font-url("a088ecc-a53c-4831-a95b-6fd81b5b338a.eot") format("eot");
+	// }
+	// @font-face {
+	// 	font-family: 'DIN-Next-Bold';
+	// 	src: font-url("b32ab78b-6c51-4bd3-bc37-4edcec0331f8.eot") format("eot");
+	// }
+	// @font-face {
+	// 	font-family: 'DIN-Next-Medium';
+	// 	src: font-url("4393bcd9-65c9-4c71-b688-9a0c17e40ebf.eot") format("eot");
+	// }
+}
+
+// @include font-face('zenicons',
+// 		font-files('zenicons.woff', woff,'zenicons.ttf', ttf),
+// 		false,
+// 		400,
+// 		normal);
+//
+//
+// @font-face {
+// 	font-family: 'zenicons';
+// 	src: font-url("fonts/zenicons.woff") format("woff"),
+// 			 font-url("fonts/zenicons.ttf") format("ttf");
+
+// 	font-weight: 400;
+// 	font-style: normal;
+// }
+//@charset "UTF-8"

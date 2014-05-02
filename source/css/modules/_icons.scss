@@ -1,0 +1,52 @@
+
+%icon-base {
+	font-family: 'zenicons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+$icon-map: (
+	ZEN-three-arrows: "\e600",
+	ZEN-search: "\e601",
+	ZEN-menu: "\e602",
+	ZEN-arrow-up: "\e603",
+	ZEN-arrow-right: "\e604",
+	ZEN-arrow-left: "\e605",
+	ZEN-arrow-down: "\e606"
+);
+
+
+@mixin icon($icon-name, $font-size: false, $color: false) {
+	@extend %icon-base;
+	@if $font-size {
+		font-size: $font-size;
+	}
+	@if $color {
+		color: $color;
+	}
+	content: map-get($icon-map, $icon-name);
+}
+
+
+@mixin icon-button($icon-name, $font-size: false, $color: false) {
+	@if $font-size {
+		width: em($font-size);
+		height: em($font-size);
+	}
+	&:before {
+		@extend %icon-base;
+		@if $font-size {
+			font-size: $font-size;
+		}
+		@if $color {
+			color: $color;
+		}
+		content: map-get($icon-map, $icon-name);
+	}
+}

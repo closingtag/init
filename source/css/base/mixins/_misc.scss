@@ -1,0 +1,122 @@
+
+@mixin image-replace() {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    *line-height: 0;
+  }
+  br {
+    display: none;
+  }
+}
+
+
+// simple calc-mixin
+@mixin calc($property, $value) {
+  #{$property}: -webkit-calc(#{$value});
+  #{$property}: calc(#{$value});
+}
+
+// For adding icons to elements using CSS pseudo-elements
+// Source: http://jaydenseric.com/blog/fun-with-sass-and-font-icons
+@mixin icon($position: 'before', $styles: true, $icon: false, $fontsize: 20px) {
+  // Either a :before or :after pseudo-element, defaulting to :before
+  &:#{$position} {
+    @if $icon {
+      // Icon has been specified
+      content: match($icons, $icon);
+    }
+    @if $styles {
+      // Supportive icon styles have been specified
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: none;
+      line-height: 1;
+      font: {
+        style: normal;
+        variant: normal;
+        weight: normal;
+        size: $fontsize;
+        family: 'icomoon';
+      }
+    }
+    // Include any extra rules supplied for the pseudo-element
+    @content;
+  }
+}
+
+@mixin vh() {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+
+  &.focusable {
+    &:active, &:focus {
+      clip: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      position: static;
+      width: auto;
+    }
+  }
+}
+
+// Font mixin
+@mixin font($family: false, $size: false, $weight: false, $style: false) {
+  @if ($webfont) {
+    .wf-active & {
+      font-family: $family;
+    }
+  }
+  @else {
+    font-family: $family;
+  }
+  @if ($size) {
+    @include x-rem($size);
+    //margin-bottom: measure-margin($size);
+  }
+  @if ($weight) {
+    font-weight: $weight;
+  }
+  @if ($style) {
+    font-style: $style;
+  }
+}
+
+
+// @mixin x-rgba()
+//
+// RGBA IE fallback
+// based on http://thesassway.com/intermediate/mixins-for-semi-transparent-colors
+//
+// usage:
+// @include x-rgba(rgba(red, 0.6), white);
+// @include x-rgba(rgba(red, 0.6), white, 'color');
+
+@mixin x-rgba($color, $background, $attribute: 'background-color') {
+  $percent: alpha($color) * 100%;
+  $opaque: opacify($color, 1);
+  $solid-color: mix($opaque, $background, $percent);
+
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8 {
+    @include old-ie {
+      #{$attribute}: $solid-color;
+    }
+  }
+  @else {
+    #{$attribute}: $color;
+  }
+}

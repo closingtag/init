@@ -1,0 +1,56 @@
+// Set lightness of a given color
+// adapted from https://github.com/Team-Sass/color-schemer/blob/master/stylesheets/color-schemer/_color-adjustments.scss
+// Usage: background-color: set-lightness($color-main, 15%);
+//        aka 15% transparence of a color
+@function set-lightness($color, $lightness) {
+	@return hsla(hue($color), saturation($color), (100 - $lightness), alpha($color));
+}
+
+// simple px to em conversion
+@function px2em($font_size, $base_font_size: 16) {
+	@return $font_size / $base_font_size + em;
+}
+
+// Strips the unit for a given number
+// @param   $number     ('Number')  the number the unit should be stripped
+// @returns ('Number')  the number without an unit
+@function strip-units($number) {
+		@return $number / ($number * 0 + 1);
+}
+
+// Converts px to em
+// @param   $target     ('Number')  target pixel value
+// @param   $context    ('Number')  context (container) pixel size
+// @returns ('Number')        the px value converted to em
+@function em($target, $context: $base-fontsize) {
+	@return ($target / $context) * 1em;
+}
+
+// Converts em to px
+// @param   $target     ('Number')  target em value
+// @param   $context    ('Number')  context (container) pixel size
+// @returns ('Number')  the px value converted to em
+@function px($target, $context: $base-fontsize) {
+		@return (strip-units($target) * strip-units($context)) * 1px;
+}
+
+// To simulate associative arrays
+// Source: http://hugogiraudel.com/2013/08/12/sass-functions/#mapping
+@function match($haystack, $needle) {
+  @each $item in $haystack {
+    $index: index($item, $needle);
+    @if $index {
+      $return: if($index == 1, 2, $index);
+      @return nth($item, $return);
+    }
+  }
+  @return false;
+}
+
+// @function measure-margin
+// from http://typeplate.com/
+// -------------------------------------//
+// divide 1 unit of measure by given font-size & return a relative em value
+@function measure-margin($font-size: $base-fontsize, $line-height: $base-lineheight, $value: em) {
+  @return (strip-units($font-size) / ($line-height * strip-units($base-fontsize)))#{$value};
+}

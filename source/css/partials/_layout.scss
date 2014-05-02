@@ -1,0 +1,68 @@
+/* Layout
+ * ===================================================================
+ */
+.container {
+	@extend %clearfix;
+	min-height: 100%;
+	max-width: $containerMax;
+	position: relative;
+
+	@include old-ie {
+		min-width: $containerMax;
+	}
+}
+
+//header
+[role="banner"] {
+	@extend %cf;
+}
+
+// content
+main {
+
+}
+
+// aside
+[role="complemetary"] {
+
+}
+
+// navigation
+[role="navigation"] {
+
+}
+
+//footer
+[role="contentinfo"] {
+
+}
+
+
+.content {
+
+}
+
+// find better place
+//
+
+
+// specific layout styles
+.logo {
+
+}
+
+.link-more {
+
+}
+
+.link-totop {
+
+}
+
+.link-back {
+
+}
+
+.link-to-navigation {
+
+}
