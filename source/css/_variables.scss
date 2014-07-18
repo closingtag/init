@@ -1,4 +1,4 @@
-@import "base/font-stack";           // load font-stacks
+//@import "base/font-stack";           // load font-stacks
 
 // compass global variables
 $experimental-support-for-khtml: false;
@@ -13,63 +13,53 @@ $responsive:      true;       // responsive project
 $modernizr:       true;       // use modernizr for css
 
 // customers colors
-$color-brand1:    hsl(355, 95%, 45%)  !default; // red
-$color-brand2:    hsl(143, 100%, 28%) !default; // green
-$color-back:      hsl(38, 69%, 89%);
+$color-brand1:    hsl(329, 100%,  44%) !default; // magenta
+$color-brand2:    hsl(240, 100%,  28%) !default; // green
 
 // default colors
-$white:           white   !default;
-$black:           black   !default;
-$darkergrey:      #333    !default;
-$darkgrey:        #666    !default;
-$grey:            #999    !default;
-$lightgrey:       #ccc    !default;
-$lightergrey:     #f0f0f0 !default;
+$white:           hsl(  0,   0%, 100%) !default;
+$black:           hsl(  0,   0%,   0%) !default;
+$darkergrey:      hsl(  0,   0%,   1%) !default;
+$darkgrey:        hsl(  0,   0%,  20%) !default;
+$grey:            hsl(  0,   0%,  42%) !default;
+$lightgrey:       hsl(  0,   0%,  93%) !default;
+$lightergrey:     hsl(  0,   0%,  97%) !default;
 
 // site wide colors
-$color-bg:        $white !default;
-$color-main:      $color-brand1 !default;
-$color-secondary: $color-brand2 !default;
-$color-text:      $black !default;
+$color-bg:        $white               !default;
+$color-main:      $color-brand1        !default;
+$color-secondary: $color-brand2        !default;
+$color-text:      $grey                !default;
 
-$color-highlight: $color-brand1 !default;
-$color-alert:     red !default;
-$color-success:   #5da423 !default;
-$color-mark:      yellow !default;
-
-$color-bodyBg:    $color-bg !default;
-$color-headerBg:  $color-brand1 !default;
-$color-footerBg:  $black !default;
-
-// gradient colors
-$color-gradient1:         $lightgrey !default;
-$color-gradient2:         $lightergrey !default;
+$color-highlight: $color-brand1        !default;
+$color-alert:     red                  !default;
+$color-success:   #5da423              !default;
+$color-mark:      yellow               !default;
 
 // Headline colors
-$color-h1:    $black !default;
-$color-h2:    $black !default;
-$color-h3:    $black !default;
-$color-h4:    $black !default;
-$color-h5:    $black !default;
-$color-h6:    $black !default;
+$color-h1:    $darkgrey     !default;
+$color-h2:    $darkgrey     !default;
+$color-h3:    $darkgrey     !default;
+$color-h4:    $darkgrey     !default;
+$color-h5:    $darkgrey     !default;
+$color-h6:    $darkgrey     !default;
 
 // Link colors
-$link-color:  $color-brand2 !default;
-$link-colorV: $color-brand2 !default;
-$link-colorH: $color-brand2 !default;
-$link-colorF: $color-brand2 !default;
-$link-colorA: $color-brand2 !default;
+$link-color:  $color-main   !default;
+$link-colorV: $color-main   !default;
+$link-colorH: $color-main   !default;
+$link-colorF: $color-main   !default;
+$link-colorA: $color-main   !default;
 
 
 // Font settings
-$font-main:       sans-serif    !default; // $helvetica-font-stack
-$font-alternate:  serif         !default; // $cambria-font-stack
-$base-fontsize:   14px          !default;
+$webfont:         false         !default;
+$font-main:       sans-serif    !default;
+$font-alternate:  serif         !default;
+$base-fontsize:   16px          !default;
 $base-lineheight: 1.5           !default;
 $base-height:     $base-fontsize * $base-lineheight !default;
-$font-icon:       'icomoon';
-$webfont:         true          !default;
-$font-din:        'DIN Next', $font-main !default;
+$font-icon:       'iconfont'    !default;
 
 $h1-fontsize:     54px          !default;
 $h2-fontsize:     26px          !default;
@@ -89,28 +79,32 @@ $indent-amount:   40px          !default;
 $radius:           8px          !default;
 
 $total-width:     100%          !default;
-$containerMin:     1px          !default;
-$containerMax:  1240px          !default;
+$page-min:         1px          !default;
+$page-max:      1024px          !default;
 
 // global breakpoints
+//
+$jsenhanced:     600px          !default;
 $tiny:           320px          !default;
 $small:          480px          !default;
 $medium:         600px          !default;
-$large:         1024px          !default;
-$xlarge:        1280px          !default;
-$jsenhanced:     600px          !default;
-
+$large:          768px          !default;
+// fallback for IE8
+$xlarge:        1024px, 'no-query' true !default;
+$till-xlarge:   1023px;
+$xxlarge:       1280px;
 
 // global variables from Singularity
 @include add-grid(3);
 @include add-grid(6 at $medium);
-//@include add-grid(2.75 6.5 2.75 at $large);
-@include add-grid(12 at $large);
+@include add-grid(12 at $xlarge);
 
 @include add-gutter(1/3);
-@include add-gutter(.25 at $medium);
-@include add-gutter(.25 at $large);
-// @include add-gutter-style('split');
 
-$breakpoint-default-media: screen;
+@include add-gutter(.25 at $medium);
+@include add-gutter(.67 at $xlarge);
+@include add-gutter-style('split');
+
+// breakpoint settings
+$breakpoint-default-media: 'screen';
 $breakpoint-to-ems: true;

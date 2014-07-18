@@ -7,24 +7,3 @@
 @import "mixins/flex";
 @import "mixins/linear-gradient";
 @import "mixins/modernizr-mixins";
-
-
-@mixin old-ie {
-	@if $old-ie {
-		@content;
-	}
-}
-
-@-webkit-viewport { width : device-width; }
-@-moz-viewport { width : device-width; }
-@-ms-viewport { width : device-width; }
-@-o-viewport { width : device-width; }
-@viewport { width : device-width; }
-
-// fix WP8 viewport bug
-@include breakpoint(max-width 400px) {
-	@-ms-viewport {
-		width: 320px;
-	}
-}
-

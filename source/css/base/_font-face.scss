@@ -1,64 +1,43 @@
 // including fonts for all browser IE > 8
 
 @if $old-ie == false {
-// @font-face {
-// 	font-family: 'DIN Next';
-// 	src: font-url("fonts/DIN-regular.woff") format("woff"),
-// 			 font-url("fonts/DIN-regular.ttf") format("ttf");
+	// @font-face {
+	// 	font-family: 'Telegrotesk';
+	// 	src: font-url("tele-groteskhal-webfont.ttf") format("ttf"),
+	// 			 font-url("tele-groteskhal-webfont.woff") format("woff");
+	// 	font-weight: 400;
+	// 	font-style: normal;
+	// }
+	// @font-face {
+	// 	font-family: 'Telegrotesk';
+	// 	src: font-url("tele-grotesk-ult-webfont.ttf") format("ttf"),
+	// 			 font-url("tele-grotesk-ult-webfont.woff") format("woff");
 
-// 	font-weight: 400;
-// 	font-style: normal;
-// }
-// @font-face {
-// 	font-family: 'DIN Next';
-// 	src: font-url("fonts/DIN-bold.woff") format("woff"),
-// 			 font-url("fonts/DIN-bold.ttf") format("ttf");
+	// 	font-weight: 700;
+	// 	font-style: normal;
+	// }
+	// @font-face {
+	// 	font-family: 'Teleantiqua';
+	// 	src: font-url("tele-antiqua-webfont.woff") format("woff"),
+	// 			 font-url("tele-antiqua-webfont.ttf") format("ttf");
 
-// 	font-weight: 700;
-// 	font-style: normal;
-// }
-// @font-face {
-// 	font-family: 'DIN Next';
-// 	src: font-url("fonts/DIN-medium.woff") format("woff"),
-// 			 font-url("fonts/DIN-medium.ttf") format("ttf");
-
-// 	font-weight: 500;
-// 	font-style: normal;
-// }
-	// @include font-face('DIN Next',
-	// 	//font-files('fonts/DIN-regular.woff', woff,'DIN-regular.ttf', ttf),
-	// 	font-files("fonts/DIN-regular.woff", "fonts/DIN-regular.ttf"),
-	// 	false,
-	// 	400,
-	// 	normal);
-
-	// @include font-face('DIN Next',
-	// 	font-files('fonts/DIN-bold.woff', woff,'DIN-bold.ttf', ttf),
-	// 	false,
-	// 	700,
-	// 	normal);
-
-	// @include font-face('DIN Next',
-	// 	font-files('fonts/DIN-medium.woff', woff,'DIN-medium.ttf', ttf),
-	// 	false,
-	// 	500,
-	// 	normal);
+	// 	font-weight: 400;
+	// 	font-style: normal;
+	// }
 }
-
-// include files for IE <9
 @else {
-	// DIN
+	// include files for IE <9
 	// @font-face {
-	// 	font-family: 'DIN-Next-Regular';
-	// 	src: font-url("a088ecc-a53c-4831-a95b-6fd81b5b338a.eot") format("eot");
+	// 	font-family: 'Telegrotesk-normal';
+	// 	src: font-url("tele-groteskfet-webfont.eot") format("eot");
 	// }
 	// @font-face {
-	// 	font-family: 'DIN-Next-Bold';
-	// 	src: font-url("b32ab78b-6c51-4bd3-bc37-4edcec0331f8.eot") format("eot");
+	// 	font-family: 'Telegrotesk-bold';
+	// 	src: font-url("tele-grotesk-ult-webfont.eot") format("eot");
 	// }
 	// @font-face {
-	// 	font-family: 'DIN-Next-Medium';
-	// 	src: font-url("4393bcd9-65c9-4c71-b688-9a0c17e40ebf.eot") format("eot");
+	// 	font-family: 'Teleantiqua-normal';
+	// 	src: font-url("tele-antiqua-webfont.eot") format("eot");
 	// }
 }
 

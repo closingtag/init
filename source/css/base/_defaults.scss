@@ -2,10 +2,20 @@
  * ====================================================================
  */
 
-p, .content ol, .content ul, address {
+.content p,
+.content ol,
+.content ul,
+address {
+
   &:first-child {
     margin-top: 0;
   }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.content p {
+  margin: 0 auto 1em;
 }
 
 ul ul,
@@ -83,3 +93,22 @@ fieldset {
 label {
   cursor: pointer;
 }
+
+
+// SVG icon support fill color
+svg {
+  polygon,
+  path {
+    fill: inherit;
+  }
+}
+[class*="icon"] {
+  fill: $color-main;
+}
+
+// svg[width="50"] {
+//   width: 50px;
+// }
+// svg[height="50"] {
+//   height: 50px;
+// }

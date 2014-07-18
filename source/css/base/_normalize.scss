@@ -1,8 +1,24 @@
+@if $old-ie == false {
+  @-webkit-viewport { width : device-width; }
+  @-moz-viewport { width : device-width; }
+  @-ms-viewport { width : device-width; }
+  @-o-viewport { width : device-width; }
+  @viewport { width : device-width; }
+
+  // fix WP8 viewport bug
+  @include breakpoint(max-width 400px) {
+    @-ms-viewport {
+      width: 320px;
+    }
+  }
+}
+
 @if $responsive {
   *, *:before, *:after  {
     box-sizing: border-box;
   }
 }
+
 
 article,
 aside,
@@ -56,29 +72,29 @@ html {
   background-color: $color-bg;
   color: $color-text;
 
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
 
   @if $responsive {
-    overflow-x: hidden;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    @if $old-ie == false {
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    }
   }
-
-  @media only screen and (orientation: landscape), (orientation: portrait){
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+  @if $old-ie == false {
+    @media only screen and (orientation: landscape), (orientation: portrait){
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
   }
 
   &.wf-active {
-    font-family: $font-din;
+    font-family: $font-main;
   }
 }
 
 
 body {
   margin: 0;
-  min-height: 100%;
+  height: 100%;
   // @if $responsive {
   //   overflow-x: hidden;
   // }
@@ -89,9 +105,9 @@ body {
 a {
   color: $link-color;
   background-color: transparent;
-  text-decoration: underline;
+  text-decoration: none;
   @if $responsive {
-    -webkit-tap-highlight-color: rgba($color-brand1,.6);
+    -webkit-tap-highlight-color: rgba($color-brand1,.3);
   }
 
   &:visited {
@@ -99,6 +115,7 @@ a {
   }
   &:hover {
     color: $link-colorH;
+    text-decoration: underline;
   }
   &:focus {
     color: $link-colorF;
@@ -110,44 +127,13 @@ a {
   &:active {
     outline: 0;
   }
+
+  &[href^="tel"] {
+    color: $color-text;
+  }
 }
 
 // headlines
-h1 {
-  @include font($font-din, $h1-fontsize, 500);
-  color: $color-h1;
-  margin-bottom: 0;
-}
-
-h2 {
-  @include font($font-din, $h2-fontsize, 500);
-  color: $color-h2;
-  margin-bottom: 0;
-}
-
-h3 {
-  @include font($font-din, $h3-fontsize, 500);
-  color: $color-h3;
-  margin-bottom: .15em;
-}
-
-h4 {
-  @include font($font-din, $h4-fontsize, 600);
-  color: $color-h4;
-  margin-bottom: .25em;
-}
-
-h5 {
-  @include font($font-main, $h5-fontsize, 600);
-  color: $color-h5;
-  margin-bottom: .25em;
-}
-
-h6 {
-  @include font($font-main, $h6-fontsize, 600);
-  color: $color-h6;
-}
-
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 
@@ -155,6 +141,47 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1em;
     text-decoration: none;
   }
+}
+
+h1 {
+  @include font($font-alternate, $h1-fontsize, 700);
+  @if ($webfont) {
+    @include x-rem($h1-fontsize * 1.33);
+  }
+  color: $color-h1;
+  margin-bottom: 0;
+}
+
+h2 {
+  @include font($font-alternate, $h2-fontsize, 700);
+  @if ($webfont) {
+    @include x-rem($h2-fontsize * 1.33);
+  }
+  color: $color-h2;
+  margin-bottom: 0;
+}
+
+h3 {
+  @include font($font-alternate, $h3-fontsize, 700);
+  color: $color-h3;
+  margin-bottom: .15em;
+}
+
+h4 {
+  @include font($font-main, $h4-fontsize, 500);
+  color: $color-h4;
+  margin-bottom: .25em;
+}
+
+h5 {
+  @include font($font-main, $h5-fontsize, 500);
+  color: $color-h5;
+  margin-bottom: .25em;
+}
+
+h6 {
+  @include font($font-alternate, $h6-fontsize, 500);
+  color: $color-h6;
 }
 
 abbr[title] {

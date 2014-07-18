@@ -1,0 +1,58 @@
+//@import "compass";            // include compass lib
+@import "singularitygs";      // include sigularity grid framework
+@import "breakpoint";
+//@import "toolkit";
+
+// variables
+@import "variables";
+
+// base
+@import "base/font-face";     // font-face
+@import "base/mixins";        // Default project mixins
+//@import "base/mq-ie";       // @media query mixins w/ oldie fallback
+@import "base/normalize";     // CSS normalize.css reset
+@import "base/h5bp-styles";   // HTML5 Boilerplate styles
+@import "base/defaults";      // Default project config options
+@import "base/placeholders";  // placeholders
+@import "base/forms_default"; // form defaults
+//@import "modules/icons";
+
+// layout
+@import "partials/layout";      // layout
+@import "partials/navigations"; // navigations
+@import "partials/forms";       // forms
+
+// modules
+@import "modules/modules";    // modules
+
+// print styles if needed
+//@import "base/print";
+
+// DEBUG MODE
+$debug: false;
+@import "base/debug";
+
+
+// MediaQuery-Sync
+
+head {
+
+	@include breakpoint($tiny) {
+		font-family: tiny;
+	}
+	@include breakpoint($small) {
+		font-family: small;
+	}
+	@include breakpoint($medium) {
+		font-family: medium;
+	}
+	@include breakpoint($large) {
+		font-family: large;
+	}
+	@include breakpoint($xlarge) {
+		font-family: xlarge;
+	}
+	@include breakpoint($xxlarge) {
+		font-family: xxlarge;
+	}
+}

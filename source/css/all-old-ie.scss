@@ -1,3 +1,8 @@
+// fallback for IE8
 $old-ie: true;
-$fix-mqs: 1024px;
-@import "style";
+//$fix-mqs: 1024px;
+
+$breakpoint-no-queries: true;
+$breakpoint-no-query-fallbacks: true;
+
+@import "master";

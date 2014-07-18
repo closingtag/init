@@ -1,3 +1,18 @@
+// @mixin old-ie {}
+//
+// Oldie Mixin for @content for older IE
+//
+// usage:
+// @include old-ie {
+//    background-color: #ff0000;
+// }
+//
+@mixin old-ie {
+  @if $old-ie {
+    @content;
+  }
+}
+
 
 @mixin image-replace() {
   display: block;
@@ -17,10 +32,60 @@
 }
 
 
+@mixin vh() {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+
+  &.focusable {
+    &:active, &:focus {
+      clip: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      position: static;
+      width: auto;
+    }
+  }
+}
+
+
 // simple calc-mixin
 @mixin calc($property, $value) {
   #{$property}: -webkit-calc(#{$value});
   #{$property}: calc(#{$value});
+}
+
+
+// Font mixin
+@mixin font($family: false, $size: false, $weight: false, $style: false) {
+  @if ($webfont) {
+    // temp
+    // remove webfontloader class
+
+    //.wf-active & {
+      font-family: $family;
+    //}
+  }
+  @else {
+    font-family: $family;
+  }
+  @if ($size) {
+    @include x-rem($size);
+    //margin-bottom: measure-margin($size);
+
+  }
+  @if ($weight) {
+    font-weight: $weight;
+  }
+  @if ($style) {
+    font-style: $style;
+  }
 }
 
 // For adding icons to elements using CSS pseudo-elements
@@ -52,50 +117,6 @@
   }
 }
 
-@mixin vh() {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-
-  &.focusable {
-    &:active, &:focus {
-      clip: auto;
-      height: auto;
-      margin: 0;
-      overflow: visible;
-      position: static;
-      width: auto;
-    }
-  }
-}
-
-// Font mixin
-@mixin font($family: false, $size: false, $weight: false, $style: false) {
-  @if ($webfont) {
-    .wf-active & {
-      font-family: $family;
-    }
-  }
-  @else {
-    font-family: $family;
-  }
-  @if ($size) {
-    @include x-rem($size);
-    //margin-bottom: measure-margin($size);
-  }
-  @if ($weight) {
-    font-weight: $weight;
-  }
-  @if ($style) {
-    font-style: $style;
-  }
-}
-
 
 // @mixin x-rgba()
 //
@@ -111,12 +132,25 @@
   $opaque: opacify($color, 1);
   $solid-color: mix($opaque, $background, $percent);
 
-  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8 {
-    @include old-ie {
+  @if $old-ie {
+   @if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8 {
       #{$attribute}: $solid-color;
     }
   }
   @else {
     #{$attribute}: $color;
   }
+}
+
+
+
+// @mixin svg-with-png()
+//
+// mixin that requires filename without path or extension and optional extension override
+@mixin svg-with-png($filename, $extension: '.png') {
+    background-image: image-url($filename + '.svg');
+
+    .no-svg & {
+      background-image: image-url('png/$filename' + $extension);
+    }
 }

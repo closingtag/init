@@ -37,12 +37,12 @@ form {
 .wide,
 .half,
 .small {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
   float: left;
   clear: none;
 
   input {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     width: 100%
   }
 }
@@ -100,13 +100,18 @@ form {
 //   width: 100%;
 // }
 
-input,
-textarea {
-  &::-webkit-input-placeholder {
-    color: $grey;
-  }
-  &:-moz-placeholder {
-    color: $grey;
+$form_placeholder_prefixes: ('::-webkit-input-placeholder', ':-moz-placeholder', '::-moz-placeholder', ':-ms-input-placeholder', '::input-placeholder', '::placeholder' );
+@each $prefix in $form_placeholder_prefixes {
+
+    input[placeholder]#{$prefix},
+    textarea[placeholder]#{$prefix} {
+      color: $grey;
+      opacity: 1;
+      text-overflow: ellipsis;
+    }
+    input[placeholder]:focus#{$prefix},
+    textarea[placeholder]:focus#{$prefix} {
+      color: transparent !important;
   }
 }
 
@@ -127,19 +132,17 @@ fieldset {
     margin-left: 4%;
   }
 
-  // sup {
-  //   font-size: 1.2em;
-  //   top: -0.2em;
-  //   cursor: help;
-  // }
+  sup {
+    font-size: 1.2em;
+    top: -0.2em;
+    cursor: help;
+  }
 }
 
 label {
-  width: 36%;
-  float: left;
   padding: 0;
   margin: 0;
-  text-align: right;
+  //text-align: right;
   color: inherit;
   position: relative;
 
@@ -169,16 +172,31 @@ input[type="search"],
 input[type="button"],
 textarea,
 button {
-  width: 50%;
-  padding: 0.25em;
-  border: 1px solid $color-text;
+  width: 100%;
+  font-size: 16px;
+  padding: 1em;
+  border: 1px solid $lightgrey;
   color: $color-text;
+  background-color: $lightergrey;
+
+  border-radius: 0;
+  box-shadow: none;
+  line-height: 1;
+
+  // remove iOS shadow
+  -webkit-appearance: none;
+  -moz-appearance:none;
 }
 
-input:focus {
-  border-color: $color-highlight;
-  @include box-shadow(0 0 5px $color-highlight);
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px $darkgrey;
   color: $color-main;
+  outline: none;
+
+  @if($old-ie) {
+    outline: 2px solid $darkgrey;
+  }
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -189,14 +207,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="checkbox"],
 input[type="radio"] {
-  float: none;
-  display: inline-block;
-  text-align: left;
-  width: inherit;
-  vertical-align: text-top;
-  width: 96%;
-  margin: 0 0 0 0.5%;
-  padding: 0 0 0.5em;
+  // float: none;
+  // display: inline-block;
+  // text-align: left;
+  // width: inherit;
+  // vertical-align: text-top;
+  // width: 96%;
+  // margin: 0 0 0 0.5%;
+  // padding: 0 0 0.5em;
 }
 
 input[type="checkbox"] + .label-wrapper,
@@ -211,7 +229,8 @@ input[type="radio"] + .label-wrapper {
 
 textarea {
   width: 100%;
-  @include box-sizing(border-box);
+  box-sizing: border-box;
+  line-height: $base-lineheight;
 }
 
 legend.label + input[type="checkbox"] {
@@ -222,10 +241,16 @@ select {
   width: inherit;
 }
 
-input[type="button"],
-input[type="submit"],
-button {
-  @include box-sizing(border-box);
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+
+  // reset button bg and radius in FF for Android
+  border-radius: 0;
+  background-image: none;
 }
 
 option {
@@ -233,6 +258,6 @@ option {
 }
 
 .btn-toolbar {
-  @extend .cf;
+  @extend %clearfix;
 }
 
