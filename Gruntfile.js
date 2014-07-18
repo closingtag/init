@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
     devDir: '.tmp',
     srcDir: 'source',
-    distDir: 'dist/drupal',
+    distDir: 'dist',
 
     penthouse: {
       extract : {
