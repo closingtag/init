@@ -1,3 +1,12 @@
+$icon-map: (
+	ZEN-three-arrows: "\e600",
+	ZEN-search: "\e601",
+	ZEN-menu: "\e602",
+	ZEN-arrow-up: "\e603",
+	ZEN-arrow-right: "\e604",
+	ZEN-arrow-left: "\e605",
+	ZEN-arrow-down: "\e606"
+);
 
 %icon-base {
 	font-family: 'zenicons';
@@ -10,17 +19,6 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
-$icon-map: (
-	ZEN-three-arrows: "\e600",
-	ZEN-search: "\e601",
-	ZEN-menu: "\e602",
-	ZEN-arrow-up: "\e603",
-	ZEN-arrow-right: "\e604",
-	ZEN-arrow-left: "\e605",
-	ZEN-arrow-down: "\e606"
-);
-
 
 @mixin icon($icon-name, $font-size: false, $color: false) {
 	@extend %icon-base;

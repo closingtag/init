@@ -1,110 +1,114 @@
 //@import "base/font-stack";           // load font-stacks
 
-// compass global variables
-$experimental-support-for-khtml: false;
-$experimental-support-for-svg:   true;
-$legacy-support-for-ie6:         false;
-$legacy-support-for-ie7:         false;
-$legacy-support-for-ie8:         true;
-$old-ie:                         false !default;
+// global variables
+$support-for-ie6: false               !default;
+$support-for-ie7: false               !default;
+$support-for-ie8: true                !default;
 
-// additional variables
-$responsive:      true;       // responsive project
-$modernizr:       true;       // use modernizr for css
+$old-ie:          false               !default; // for old IE fallback
+$responsive:      true                !default; // responsive project
+$modernizr:       true                !default; // use modernizr for css
 
 // customers colors
-$color-brand1:    hsl(329, 100%,  44%) !default; // magenta
-$color-brand2:    hsl(240, 100%,  28%) !default; // green
+$color-brand1:    hsl(329, 100%,  44%) !default;
+$color-brand2:    hsl(240, 100%,  28%) !default;
 
 // default colors
 $white:           hsl(  0,   0%, 100%) !default;
 $black:           hsl(  0,   0%,   0%) !default;
-$darkergrey:      hsl(  0,   0%,   1%) !default;
+$darkergrey:      hsl(  0,   0%,  10%) !default;
 $darkgrey:        hsl(  0,   0%,  20%) !default;
 $grey:            hsl(  0,   0%,  42%) !default;
-$lightgrey:       hsl(  0,   0%,  93%) !default;
+$lightgrey:       hsl(  0,   0%,  80%) !default;
 $lightergrey:     hsl(  0,   0%,  97%) !default;
+
+$lightest:        $white               !default; // lightest color
+$darkest:         $black               !default; // darkest color
 
 // site wide colors
 $color-bg:        $white               !default;
 $color-main:      $color-brand1        !default;
 $color-secondary: $color-brand2        !default;
-$color-text:      $grey                !default;
+$color-text:      $darkergrey          !default;
 
 $color-highlight: $color-brand1        !default;
 $color-alert:     red                  !default;
-$color-success:   #5da423              !default;
+$color-success:   green                !default;
 $color-mark:      yellow               !default;
 
 // Headline colors
-$color-h1:    $darkgrey     !default;
-$color-h2:    $darkgrey     !default;
-$color-h3:    $darkgrey     !default;
-$color-h4:    $darkgrey     !default;
-$color-h5:    $darkgrey     !default;
-$color-h6:    $darkgrey     !default;
+$color-h1:        $darkgrey            !default;
+$color-h2:        $darkgrey            !default;
+$color-h3:        $darkgrey            !default;
+$color-h4:        $darkgrey            !default;
+$color-h5:        $darkgrey            !default;
+$color-h6:        $darkgrey            !default;
 
 // Link colors
-$link-color:  $color-main   !default;
-$link-colorV: $color-main   !default;
-$link-colorH: $color-main   !default;
-$link-colorF: $color-main   !default;
-$link-colorA: $color-main   !default;
+$color-link:      $color-brand1        !default;
+$color-linkV:     $color-brand1        !default;
+$color-linkH:     $color-brand2        !default;
+$color-linkF:     $color-brand2        !default;
+$color-linkA:     $color-brand2        !default;
 
+// Focused objects
+$focus-color:     $color-main          !default;
+$focus-style:     solid                !default;
+$focus-width:     2px                  !default;
+$focus-offset:    5px                 !default;
+$focus: $focus-width $focus-style $focus-color !default;
 
 // Font settings
-$webfont:         false         !default;
-$font-main:       sans-serif    !default;
-$font-alternate:  serif         !default;
-$base-fontsize:   16px          !default;
-$base-lineheight: 1.5           !default;
+$font-main:       sans-serif           !default;
+$font-alternate:  serif                !default;
+$webfont:         false                !default;
+$font-icon:       'iconfont'           !default;
+$base-fontsize:   16px                 !default;
+$base-lineheight: 1.5                  !default;
 $base-height:     $base-fontsize * $base-lineheight !default;
-$font-icon:       'iconfont'    !default;
 
-$h1-fontsize:     54px          !default;
-$h2-fontsize:     26px          !default;
-$h3-fontsize:     24px          !default;
-$h4-fontsize:     16px          !default;
-$h5-fontsize:     14px          !default;
-$h6-fontsize:     12px          !default;
+$h1-fontsize:     54px                 !default;
+$h2-fontsize:     26px                 !default;
+$h3-fontsize:     24px                 !default;
+$h4-fontsize:     16px                 !default;
+$h5-fontsize:     14px                 !default;
+$h6-fontsize:     12px                 !default;
 
-$giga-fontsize:  117px          !default;
-$mega-fontsize:   90px          !default;
-$kilo-fontsize:   72px          !default;
-$milli-fontsize:  10px          !default;
-$micro-fontsize:   9px          !default;
+$giga-fontsize:  117px                 !default;
+$mega-fontsize:   90px                 !default;
+$kilo-fontsize:   72px                 !default;
+$milli-fontsize:  10px                 !default;
+$micro-fontsize:   9px                 !default;
 
-$padding:         20px          !default;
-$indent-amount:   40px          !default;
-$radius:           8px          !default;
+$padding:         20px                 !default;
+$indent-amount:   40px                 !default;
+$radius:           4px                 !default;
 
-$total-width:     100%          !default;
-$page-min:         1px          !default;
-$page-max:      1024px          !default;
+$total-width:     100%                 !default;
+$page-min:         1px                 !default;
+$page-max:      1024px                 !default;
 
 // global breakpoints
-//
-$jsenhanced:     600px          !default;
-$tiny:           320px          !default;
-$small:          480px          !default;
-$medium:         600px          !default;
-$large:          768px          !default;
-// fallback for IE8
-$xlarge:        1024px, 'no-query' true !default;
-$till-xlarge:   1023px;
-$xxlarge:       1280px;
+$tiny:           320px                 !default;
+$small:          480px                 !default;
+$medium:         600px                 !default;
+$large:          768px                 !default;
+$xlarge:        1024px,'no-query' true !default; // fallback for IE8
+$xxlarge:       1280px                 !default;
+$huge:          1600px                 !default;
+
+$jsenhanced:    $medium                !default;
 
 // global variables from Singularity
 @include add-grid(3);
 @include add-grid(6 at $medium);
-@include add-grid(12 at $xlarge);
+@include add-grid(12 at $large);
 
-@include add-gutter(1/3);
-
-@include add-gutter(.25 at $medium);
-@include add-gutter(.67 at $xlarge);
+@include add-gutter(1/6);
+@include add-gutter(.20 at $medium);
+@include add-gutter(.30 at $large);
 @include add-gutter-style('split');
 
 // breakpoint settings
-$breakpoint-default-media: 'screen';
+$breakpoint-default-media: 'only all';
 $breakpoint-to-ems: true;

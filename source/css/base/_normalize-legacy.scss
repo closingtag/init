@@ -1,9 +1,10 @@
-@charset 'UTF-8';
+@if $old-ie == false {
+	@-webkit-viewport { width : device-width; }
+	@-moz-viewport { width : device-width; }
+	@-ms-viewport { width : device-width; }
+	@-o-viewport { width : device-width; }
+	@viewport { width : device-width; }
 
-@if $old-ie==false {
-	@viewport {
-		width: device-width;
-	}
 	// fix WP8 viewport bug
 	@include breakpoint(max-width 400px) {
 		@-ms-viewport {
@@ -13,12 +14,11 @@
 }
 
 @if $responsive {
-	*,
-	*:before,
-	*:after {
-		box-sizing: inherit;
+	*, *:before, *:after  {
+		box-sizing: border-box;
 	}
 }
+
 
 article,
 aside,
@@ -39,6 +39,10 @@ audio,
 canvas,
 video {
 	display: inline-block;
+	@if $support-for-ie6 or $support-for-ie7 {
+		*display: inline;
+		*zoom: 1;
+	}
 }
 
 audio,
@@ -60,7 +64,6 @@ template {
 }
 
 html {
-	box-sizing: border-box;
 	font-size: $base-fontsize;
 	font-family: $font-main;
 	font-weight: 400;
@@ -68,6 +71,7 @@ html {
 	line-height: $base-lineheight;
 	background-color: $color-bg;
 	color: $color-text;
+
 
 	@if $responsive {
 		@if $old-ie == false {
@@ -82,44 +86,43 @@ html {
 		}
 	}
 
-	@if $webfont {
-		&.wf-active {
-			font-family: $webfont-main;
-		}
+	&.wf-active {
+		font-family: $font-main;
 	}
 }
+
 
 body {
 	margin: 0;
 	height: 100%;
+	// @if $responsive {
+	//   overflow-x: hidden;
+	// }
+
 }
 
+// links
 a {
-	color: inherit;
+	color: $link-color;
 	background-color: transparent;
 	text-decoration: none;
-
 	@if $responsive {
 		-webkit-tap-highlight-color: rgba($color-brand1,.3);
 	}
 
 	&:visited {
-		color: $color-link;
+		color: $link-colorV;
 	}
-
 	&:hover {
-		color: $color-linkH;
+		color: $link-colorH;
 		text-decoration: underline;
 	}
-
 	&:focus {
-		color: $color-linkF;
+		color: $link-colorF;
 	}
-
 	&:active {
-		color: $color-linkA;
+		color: $link-colorA;
 	}
-
 	&:hover,
 	&:active {
 		outline: 0;
@@ -130,18 +133,18 @@ a {
 	}
 }
 
+// headlines
 h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 
 	> a {
-		color: $color-link;
 		font-size: 1em;
 		text-decoration: none;
 	}
 }
 
 h1 {
-	@include font($font-alternate, $h1-fontsize, 400);
+	@include font($font-alternate, $h1-fontsize, 700);
 	@if ($webfont) {
 		@include x-rem($h1-fontsize * 1.33);
 	}
@@ -150,7 +153,7 @@ h1 {
 }
 
 h2 {
-	@include font($font-alternate, $h2-fontsize, 400);
+	@include font($font-alternate, $h2-fontsize, 700);
 	@if ($webfont) {
 		@include x-rem($h2-fontsize * 1.33);
 	}
@@ -159,25 +162,25 @@ h2 {
 }
 
 h3 {
-	@include font($font-alternate, $h3-fontsize, 400);
+	@include font($font-alternate, $h3-fontsize, 700);
 	color: $color-h3;
 	margin-bottom: .15em;
 }
 
 h4 {
-	@include font($font-main, $h4-fontsize, 400);
+	@include font($font-main, $h4-fontsize, 500);
 	color: $color-h4;
 	margin-bottom: .25em;
 }
 
 h5 {
-	@include font($font-main, $h5-fontsize, 400);
+	@include font($font-main, $h5-fontsize, 500);
 	color: $color-h5;
 	margin-bottom: .25em;
 }
 
 h6 {
-	@include font($font-alternate, $h6-fontsize, 400);
+	@include font($font-alternate, $h6-fontsize, 500);
 	color: $color-h6;
 }
 
@@ -199,8 +202,8 @@ dfn {
 }
 
 hr {
-	box-sizing: content-box;
-	height: 0;
+		box-sizing: content-box;
+		height: 0;
 }
 
 mark {
@@ -219,11 +222,21 @@ kbd,
 samp {
 	font-family: monospace, serif;
 	font-size: 1em;
+	@if $support-for-ie6 {
+		_font-family: "courier new", monospace;
+	}
 }
 
 pre {
 	overflow: auto;
-	white-space: pre-wrap;
+	@if $support-for-ie6 or $support-for-ie7 {
+			white-space: pre;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+	}
+	@else {
+			white-space: pre-wrap;
+	}
 }
 
 q {
@@ -254,11 +267,19 @@ dl,
 menu,
 ol,
 ul {
-	margin: 0 0 measure-margin($base-fontsize);
+		margin: 0 0 measure-margin($base-fontsize);
 }
 
 dd {
-	margin: 0 0 0 em($indent-amount, $base-fontsize);
+		margin: 0 0 0 em($indent-amount, $base-fontsize);
+}
+
+@if $support-for-ie6 or $support-for-ie7 {
+	menu,
+	ol,
+	ul {
+			padding: 0 0 0 em($indent-amount, $base-fontsize);
+	}
 }
 
 nav ul,
@@ -266,16 +287,21 @@ nav ol {
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	@if $support-for-ie7 {
+		list-style-image: none;
+	}
 }
 
 img {
 	border: 0;
-	margin: 0; // fixes image stretching in flexbox columns
 	vertical-align: bottom; //remove gap under image
 
+	@if $support-for-ie7 or $support-for-ie8 {
+		-ms-interpolation-mode: bicubic;
+	}
 	@if $responsive {
-		max-width: 100%;
-		width: auto;
+		//max-width: 100%; // images should always be as large as column
+		width: 100%;
 		height: auto;
 	}
 }
@@ -289,6 +315,10 @@ svg {
 	}
 }
 
+::-moz-selection {
+	background: $color-text;
+	color: white;
+}
 ::selection {
 	background: $color-text;
 	color: white;
@@ -298,15 +328,23 @@ figure {
 	margin: 0;
 }
 
+@if $support-for-ie6 or $support-for-ie7 {
+	form {
+			margin: 0;
+	}
+}
+
 fieldset {
 	border: none;
-	margin: 0;
 	margin: 0;
 }
 
 legend {
 	border: 0;
 	padding: 0;
+	@if $support-for-ie6 or $support-for-ie7 {
+		*margin-left: -7px;
+	}
 }
 
 button,
@@ -317,6 +355,11 @@ textarea {
 	color: inherit;
 	font: inherit;
 	margin: 0;
+	@if $support-for-ie6 or $support-for-ie7 {
+		font-family: $font-main;
+		vertical-align: baseline;
+		*vertical-align: middle;
+	}
 }
 
 button {
@@ -334,6 +377,9 @@ input[type="reset"],
 input[type="submit"] {
 	cursor: pointer;
 	-webkit-appearance: button;
+	@if $support-for-ie7 {
+		*overflow: visible;
+	}
 
 	// reset button bg and radius in FF for Android
 	border-radius: 0;
@@ -353,6 +399,10 @@ input[type="checkbox"],
 input[type="radio"] {
 	box-sizing: border-box;
 	padding: 0;
+	@if $support-for-ie7 {
+		*height: 13px;
+		*width: 13px;
+	}
 }
 
 input[type="number"]::-webkit-inner-spin-button,

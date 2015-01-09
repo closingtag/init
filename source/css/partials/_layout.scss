@@ -4,21 +4,22 @@
 .container {
 	@extend %clearfix;
 	min-height: 100%;
-	max-width: $containerMax;
+	max-width: $page-max;
+	overflow-x: hidden;
 	position: relative;
 
 	@include old-ie {
-		min-width: $containerMax;
+		min-width: $page-max;
 	}
 }
 
 //header
 [role="banner"] {
-	@extend %cf;
+
 }
 
 // content
-main {
+[role="main"] {
 
 }
 
@@ -37,32 +38,6 @@ main {
 
 }
 
-
 .content {
-
-}
-
-// find better place
-//
-
-
-// specific layout styles
-.logo {
-
-}
-
-.link-more {
-
-}
-
-.link-totop {
-
-}
-
-.link-back {
-
-}
-
-.link-to-navigation {
 
 }

@@ -1,4 +1,17 @@
 
+// Converts px to rem with old-ie fallback
+// @param   $target     ('Number')  target em value
+// @param   $context    ('Number')  context (container) pixel size
+// @returns ('Number')  the px value converted to rem
+@function rem($target, $context: $base-fontsize) {
+	@if $old-ie == true {
+		@return strip-units($target) * 1px;
+	}
+	@else {
+		@return (strip-units($target) / strip-units($context)) * 1rem;
+	}
+}
+
 // simple rem-mixin
 @mixin rem($size: $base-fontsize, $property: 'font-size', $base: $base-fontsize) {
 	@if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8  {
@@ -55,7 +68,7 @@
 	// #{$property}: $px-values; // maybe leave for Opera Mini
 	#{$property}: $rem-values;
 	// hand over to old-ie mixin (<IE9)
-	@if $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8 {
+	@if $support-for-ie6 or $support-for-ie7 or $support-for-ie8 {
 		@include old-ie {
 			#{$property}: $px-values;
 		}

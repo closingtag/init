@@ -1,5 +1,5 @@
 /* Modernizr (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-shiv-load-cssclasses-opacity
+ * Build: http://modernizr.com/download/#-mq-shiv-load-cssclasses-svg-opacity
  */
 ;
 
@@ -7,7 +7,7 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.8.0',
+    var version = '2.8.3',
 
     Modernizr = {},
 
@@ -27,6 +27,7 @@ window.Modernizr = (function( window, document, undefined ) {
     prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
 
 
+    ns = {'svg': 'http://www.w3.org/2000/svg'},
 
     tests = {},
     inputs = {},
@@ -36,10 +37,66 @@ window.Modernizr = (function( window, document, undefined ) {
 
     slice = classes.slice,
 
-    featureName,
+    featureName, 
 
 
+    injectElementWithStyles = function( rule, callback, nodes, testnames ) {
 
+      var style, ret, node, docOverflow,
+          div = document.createElement('div'),
+                body = document.body,
+                fakeBody = body || document.createElement('body');
+
+      if ( parseInt(nodes, 10) ) {
+                      while ( nodes-- ) {
+              node = document.createElement('div');
+              node.id = testnames ? testnames[nodes] : mod + (nodes + 1);
+              div.appendChild(node);
+          }
+      }
+
+                style = ['&#173;','<style id="s', mod, '">', rule, '</style>'].join('');
+      div.id = mod;
+          (body ? div : fakeBody).innerHTML += style;
+      fakeBody.appendChild(div);
+      if ( !body ) {
+                fakeBody.style.background = '';
+                fakeBody.style.overflow = 'hidden';
+          docOverflow = docElement.style.overflow;
+          docElement.style.overflow = 'hidden';
+          docElement.appendChild(fakeBody);
+      }
+
+      ret = callback(div, rule);
+        if ( !body ) {
+          fakeBody.parentNode.removeChild(fakeBody);
+          docElement.style.overflow = docOverflow;
+      } else {
+          div.parentNode.removeChild(div);
+      }
+
+      return !!ret;
+
+    },
+
+    testMediaQuery = function( mq ) {
+
+      var matchMedia = window.matchMedia || window.msMatchMedia;
+      if ( matchMedia ) {
+        return matchMedia(mq) && matchMedia(mq).matches || false;
+      }
+
+      var bool;
+
+      injectElementWithStyles('@media ' + mq + ' { #' + mod + ' { position: absolute; } }', function( node ) {
+        bool = (window.getComputedStyle ?
+                  getComputedStyle(node, null) :
+                  node.currentStyle)['position'] == 'absolute';
+      });
+
+      return bool;
+
+     },
     _hasOwnProperty = ({}).hasOwnProperty, hasOwnProp;
 
     if ( !is(_hasOwnProperty, 'undefined') && !is(_hasOwnProperty.call, 'undefined') ) {
@@ -139,6 +196,9 @@ window.Modernizr = (function( window, document, undefined ) {
     };
 
 
+    tests['svg'] = function() {
+        return !!document.createElementNS && !!document.createElementNS(ns.svg, 'svg').createSVGRect;
+    };
     for ( var feature in tests ) {
         if ( hasOwnProp(tests, feature) ) {
                                     featureName  = feature.toLowerCase();
@@ -364,7 +424,9 @@ window.Modernizr = (function( window, document, undefined ) {
     Modernizr._version      = version;
 
     Modernizr._prefixes     = prefixes;
-    docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') +
+
+    Modernizr.mq            = testMediaQuery;
+    Modernizr.testStyles    = injectElementWithStyles;    docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2') +
 
                                                     (enableClasses ? ' js ' + classes.join(' ') : '');
 

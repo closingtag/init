@@ -54,3 +54,73 @@
 @function measure-margin($font-size: $base-fontsize, $line-height: $base-lineheight, $value: em) {
   @return (strip-units($font-size) / ($line-height * strip-units($base-fontsize)))#{$value};
 }
+
+// Add percentage of white to a color
+@function tint($color, $percent){
+  @return mix(white, $color, $percent);
+}
+
+// Add percentage of black to a color
+@function shade($color, $percent){
+  @return mix(black, $color, $percent);
+}
+
+
+
+
+/*
+ * Asset helper
+ * via http://css-tricks.com/snippets/sass/simple-asset-helper-functions/
+ *
+
+USAGE:
+
+@font-face {
+  font-family: 'Unicorn Font';
+  src: font('unicorn.eot?') format('eot'),
+       font('unicorn.otf') format('truetype'),
+       font('unicorn.woff') format('woff'),
+       font('unicorn.svg#unicorn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.foo {
+  background-image: image('kittens.png');
+}
+ *
+ *
+ */
+
+/// Base path for assets (fonts, images...),
+/// should not include trailing slash
+/// @access public
+/// @type String
+$asset-base-path: '../' !default;
+
+/// Asset URL builder
+/// @access private
+/// @param {String} $type - Asset type, matching folder name
+/// @param {String} $file - Asset file name, including extension
+/// @return {URL} - A `url()` function leading to the asset
+@function asset($type, $file) {
+  @return url($asset-base-path + '/' + $type + '/' + $file);
+}
+
+/// Image asset helper
+/// @access public
+/// @param {String} $file - Asset file name, including extension
+/// @return {URL} - A `url()` function leading to the image
+/// @require {function} asset
+@function image($file) {
+  @return asset('img', $file);
+}
+
+/// Font asset helper
+/// @access public
+/// @param {String} $file - Asset file name, including extension
+/// @return {URL} - A `url()` function leading to the font
+/// @require {function} asset
+@function font($file) {
+  @return asset('fonts', $file);
+}

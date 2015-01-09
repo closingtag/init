@@ -1,58 +1,54 @@
-//@import "compass";            // include compass lib
 @import "singularitygs";      // include sigularity grid framework
-@import "breakpoint";
-//@import "toolkit";
+@import "breakpoint";         // include breakpoint framework
 
 // variables
 @import "variables";
 
 // base
-@import "base/font-face";     // font-face
-@import "base/mixins";        // Default project mixins
-//@import "base/mq-ie";       // @media query mixins w/ oldie fallback
-@import "base/normalize";     // CSS normalize.css reset
-@import "base/h5bp-styles";   // HTML5 Boilerplate styles
-@import "base/defaults";      // Default project config options
-@import "base/placeholders";  // placeholders
-@import "base/forms_default"; // form defaults
-//@import "modules/icons";
+@import "base/mixins";          // Default project mixins
+@import "base/normalize";       // CSS normalize.css reset
+@import "base/helpers";         // helper classes
+@import "base/defaults";        // Default project config options
+@import "base/placeholders";    // placeholders
+@import "modules/icons";        // icon fonts
+@import "base/forms_default";   // form defaults
 
 // layout
 @import "partials/layout";      // layout
+@import "partials/links";       // link styling (more link, etc.)
 @import "partials/navigations"; // navigations
-@import "partials/forms";       // forms
 
 // modules
-@import "modules/modules";    // modules
+@import "modules/modules";      // modules
 
-// print styles if needed
-//@import "base/print";
 
 // DEBUG MODE
 $debug: false;
-@import "base/debug";
+@import "base/debug";           // debug CSS
+@import "base/revenge";         // revenge CSS
 
 
 // MediaQuery-Sync
-
 head {
-
 	@include breakpoint($tiny) {
-		font-family: tiny;
+		font-family: tiny-1;
 	}
 	@include breakpoint($small) {
-		font-family: small;
+		font-family: small-2;
 	}
 	@include breakpoint($medium) {
-		font-family: medium;
+		font-family: medium-3;
 	}
 	@include breakpoint($large) {
-		font-family: large;
+		font-family: large-4;
 	}
 	@include breakpoint($xlarge) {
-		font-family: xlarge;
+		font-family: xlarge-5;
 	}
 	@include breakpoint($xxlarge) {
-		font-family: xxlarge;
+		font-family: xxlarge-6;
+	}
+	@include breakpoint($huge) {
+		font-family: huge-7;
 	}
 }

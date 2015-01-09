@@ -3,11 +3,11 @@
  */
 
 requirejs.config({
-  baseUrl: 'js/modules/common',
-  noGlobal: true,
-  paths: {
-    jquery: '../../vendor/jquery',
-    text: '../../vendor/plugin/text'
-  },
-  shim: {}
+	baseUrl: 'js/modules/common',
+	noGlobal: true,
+	paths: {
+		jquery: '../../vendor/jquery',
+		text: '../../vendor/plugin/text'
+	},
+	shim: {}
 });
