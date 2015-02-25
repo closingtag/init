@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
 		// config
 		devDir: '.tmp',
-		srcDir: 'source',
+		srcDir: 'src',
 		distDir: 'dist',
 		autopref: ['last 2 version', 'ie >= 9', 'Android >= 2.3'],
 
