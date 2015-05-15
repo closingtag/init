@@ -18,11 +18,12 @@ module.exports = function(grunt) {
 		sass: {
 			options: {
 				//bundleExec: true,
-				loadPath: ['~/.gem/ruby/2.0.0/gems/singularitygs-1.4.0/stylesheets','~/.gem/ruby/2.0.0/gems/breakpoint-2.5.0/stylesheets']
+				//includePaths: ['/Users/svenwolfermann/.gem/ruby/2.0.0/gems/singularitygs-1.4.0/stylesheets','/Users/svenwolfermann/.gem/ruby/2.0.0/gems/breakpoint-2.5.0/stylesheets']
 			},
 			dev: {
 				options: {
-					style: 'expanded'
+					style: 'expanded',
+					//includePaths: ['~/.gem/ruby/2.0.0/gems/singularitygs-1.4.0/stylesheets','~/.gem/ruby/2.0.0/gems/breakpoint-2.5.0/stylesheets']
 				},
 				files: [{
 					expand: true,
