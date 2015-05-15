@@ -1,13 +1,23 @@
+
+// Initialize local Namespace
+
+var APP = APP || {};
+
 /**
  * require.js config
  */
 
-requirejs.config({
-	baseUrl: 'js/modules/common',
+APP.requirePath = 'js/vendor/require.js';
+
+APP.requireConfig = {
+
+	baseUrl: 'js/',
 	noGlobal: true,
+
 	paths: {
-		jquery: '../../vendor/jquery',
-		text: '../../vendor/plugin/text'
+
 	},
-	shim: {}
-});
+
+	shim: {
+	}
+};
