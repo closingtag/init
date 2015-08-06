@@ -45,9 +45,9 @@ a[href], button {
 p,
 ul,
 ol {
-	a {
-		color: $color-link;
-	}
+	// a {
+	// 	color: $color-link;
+	// }
 }
 
 ul ul,
@@ -145,6 +145,7 @@ path {
 //   height: 50px;
 // }
 
+a > *,
 [role="button"] > *,
 button > * {
 	pointer-events: none;

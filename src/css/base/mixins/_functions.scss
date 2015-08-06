@@ -23,7 +23,12 @@
 // @param   $context    ('Number')  context (container) pixel size
 // @returns ('Number')        the px value converted to em
 @function em($target, $context: $base-fontsize) {
-	@return ($target / $context) * 1em;
+	@if ($target == 0) {
+		@return 0;
+	}
+	@else {
+		@return ($target / $context) * 1em;
+	}
 }
 
 // Converts em to px
@@ -80,8 +85,8 @@
 *  }
 **/
 
-@function line-height($font-size, $leading){
-  @return strip-units($leading) / strip-units($font-size);
+@function line-height($target, $context){
+  @return strip-units($target) / strip-units($context);
 }
 
 /**

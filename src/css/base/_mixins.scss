@@ -7,3 +7,22 @@
 @import "mixins/flex";
 @import "mixins/linear-gradient";
 @import "mixins/modernizr-mixins";
+
+
+// will reset buttons styles
+@mixin reset-button {
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	overflow: visible; // removes padding in IE
+	&::-moz-focus-inner {
+		// removes padding in Firefox
+		border: none;
+		padding: 0;
+	}
+}
+
+@mixin smoothscroll($axis:y) {
+	overflow-#{$axis}: scroll; // has to be scroll, not auto
+	-webkit-overflow-scrolling: touch;
+}

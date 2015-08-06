@@ -3,7 +3,7 @@
 // global variables
 $support-for-ie6: false               !default;
 $support-for-ie7: false               !default;
-$support-for-ie8: true                !default;
+$support-for-ie8: false               !default;
 
 $old-ie:          false               !default; // for old IE fallback
 $responsive:      true                !default; // responsive project
@@ -16,6 +16,7 @@ $color-brand2:    hsl(240, 100%,  28%) !default;
 // default colors
 $white:           hsl(  0,   0%, 100%) !default;
 $black:           hsl(  0,   0%,   0%) !default;
+
 $darkergrey:      hsl(  0,   0%,  10%) !default;
 $darkgrey:        hsl(  0,   0%,  20%) !default;
 $grey:            hsl(  0,   0%,  42%) !default;
@@ -83,6 +84,7 @@ $micro-fontsize:   9px                 !default;
 $padding:         20px                 !default;
 $indent-amount:   40px                 !default;
 $radius:           4px                 !default;
+$button-size:     44px                 !default;
 
 $total-width:     100%                 !default;
 $page-min:         1px                 !default;
@@ -110,5 +112,6 @@ $jsenhanced:    $medium                !default;
 @include add-gutter-style('split');
 
 // breakpoint settings
-$breakpoint-default-media: 'only all';
-$breakpoint-to-ems: true;
+@include breakpoint-set('default media', 'only all');
+@include breakpoint-set('to ems', true);
+

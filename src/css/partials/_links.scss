@@ -1,3 +1,32 @@
+// links & buttons
+%button-base {
+	background-color: $darkgrey;
+	border-radius: $radius;
+	border: none;
+	color: $lightest;
+	display: inline-block;
+	//font-weight: 500;
+	font-weight: 700;
+	line-height: $base-lineheight;
+	margin-bottom: 1em;
+	padding: 0.25em 1em;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+
+	will-change: background-color, color;
+	transition: 0.2s ease-in;
+	transition-property: background-color, color;
+
+	&:focus,
+	&:hover {
+		background-color: darken($darkergrey, 20);
+		color: $lightest;
+		text-decoration: none;
+		outline: none;
+	}
+}
+
 
 .link-more {
 

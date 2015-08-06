@@ -56,7 +56,7 @@ audio:not([controls]) {
 
 [hidden],
 template {
-		display: none;
+	display: none;
 }
 
 html {
@@ -84,7 +84,7 @@ html {
 
 	@if $webfont {
 		&.wf-active {
-			font-family: $webfont-main;
+			font-family: $webfont-main, $font-main;
 		}
 	}
 }
@@ -103,9 +103,9 @@ a {
 		-webkit-tap-highlight-color: rgba($color-brand1,.3);
 	}
 
-	&:visited {
-		color: $color-link;
-	}
+	// &:visited {
+	// 	color: $color-link;
+	// }
 
 	&:hover {
 		color: $color-linkH;
@@ -142,38 +142,32 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	@include font($font-alternate, $h1-fontsize, 400);
-	@if ($webfont) {
-		@include x-rem($h1-fontsize * 1.33);
-	}
-	color: $color-h1;
+	color: inherit;// $color-h1;
 	margin-bottom: 0;
 }
 
 h2 {
 	@include font($font-alternate, $h2-fontsize, 400);
-	@if ($webfont) {
-		@include x-rem($h2-fontsize * 1.33);
-	}
-	color: $color-h2;
+	color: inherit;// $color-h2;
 	margin-bottom: 0;
 }
 
 h3 {
 	@include font($font-alternate, $h3-fontsize, 400);
-	color: $color-h3;
-	margin-bottom: .15em;
+	color: inherit;// $color-h3;
+	margin-bottom: 0.15em;
 }
 
 h4 {
 	@include font($font-main, $h4-fontsize, 400);
-	color: $color-h4;
-	margin-bottom: .25em;
+	color: inherit;// $color-h4;
+	margin-bottom: 0.25em;
 }
 
 h5 {
 	@include font($font-main, $h5-fontsize, 400);
-	color: $color-h5;
-	margin-bottom: .25em;
+	color: inherit;// $color-h5;
+	margin-bottom: 0.25em;
 }
 
 h6 {
@@ -183,6 +177,10 @@ h6 {
 
 abbr[title] {
 	border-bottom: 1px dotted;
+	@supports (text-decoration: dotted underline) {
+		border-bottom: none;
+		text-decoration: dotted underline
+	}
 }
 
 b,
@@ -210,7 +208,11 @@ mark {
 
 p,
 pre {
-	margin: 0 0 measure-margin($base-fontsize);
+	margin: 0 0 1em;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 pre,
@@ -254,7 +256,7 @@ dl,
 menu,
 ol,
 ul {
-	margin: 0 0 measure-margin($base-fontsize);
+	margin: 0 0 1em;
 }
 
 dd {
@@ -275,6 +277,7 @@ img {
 
 	@if $responsive {
 		max-width: 100%;
+		max-height: 100%;
 		width: auto;
 		height: auto;
 	}
@@ -283,6 +286,8 @@ img {
 
 svg {
 	overflow: visible;
+	max-height: 100%;
+	max-width: 100%;
 
 	&:not(:root) {
 		overflow: hidden;
@@ -301,7 +306,7 @@ figure {
 fieldset {
 	border: none;
 	margin: 0;
-	margin: 0;
+	padding: 0;
 }
 
 legend {
@@ -325,7 +330,7 @@ button {
 
 button,
 select {
-		text-transform: none;
+	text-transform: none;
 }
 
 button,
@@ -333,7 +338,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
 	cursor: pointer;
-	-webkit-appearance: button;
+	appearance: button;
 
 	// reset button bg and radius in FF for Android
 	border-radius: 0;
@@ -361,13 +366,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="search"] {
-	-webkit-appearance: textfield;
+	appearance: textfield;
 	box-sizing: content-box;
 }
 
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
-	-webkit-appearance: none;
+	appearance: none;
 }
 
 button::-moz-focus-inner,

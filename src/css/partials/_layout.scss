@@ -4,6 +4,7 @@
 .container {
 	@extend %clearfix;
 	min-height: 100%;
+	margin: 0 auto;
 	max-width: $page-max;
 	overflow-x: hidden;
 	position: relative;

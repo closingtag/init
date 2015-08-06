@@ -8,7 +8,7 @@
 $intrinsic-ratio: 16/9 !default;
 $intrinsic-ratio-width: 100% !default;
 $intrinsic-ratio-elements: '> *' !default;
-$intrinsic-ratio-extend: true !default;
+$intrinsic-ratio-extend: false !default;
 $intrinsic-ratio-direction: top !default;
 
 @mixin intrinsic-ratio-parent($extend: $intrinsic-ratio-extend) {

@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				options: {
-					style: 'expanded',
+					outputStyle: 'expanded',
 					//includePaths: ['~/.gem/ruby/2.0.0/gems/singularitygs-1.4.0/stylesheets','~/.gem/ruby/2.0.0/gems/breakpoint-2.5.0/stylesheets']
 				},
 				files: [{
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				options: {
-					style: 'compressed'
+					outputStyle: 'compressed'
 				},
 				files: [{
 					expand: true,
@@ -238,7 +238,7 @@ module.exports = function(grunt) {
 				tasks: ['svg2png:dev']
 			},
 			img: {
-				files: ['<%= srcDir %>/img/**/*', '!<%= srcDir %>/img/**/*.svg'],
+				files: ['<%= srcDir %>/img/**/*'],
 				tasks: ['sync:img']
 			},
 			sass: {
@@ -268,10 +268,8 @@ module.exports = function(grunt) {
 						index: 'overview.html'
 					},
 					ghostMode: false,
-					logLevel: "silent",
 					open: "external",
 					notify: false,
-					reloadDelay: 1000,
 					// tunnel: true,
 					// xip: true
 				}

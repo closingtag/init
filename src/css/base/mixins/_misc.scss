@@ -57,29 +57,42 @@
 
 // Font mixin
 @mixin font($family: false, $size: false, $weight: false, $style: false) {
-  @if ($webfont) {
-    // temp
-    // remove webfontloader class
 
-    //.wf-active & {
-      font-family: $family;
-    //}
-  }
-  @else {
-    font-family: $family;
-  }
-  @if ($size) {
-    @include x-rem($size);
-    //margin-bottom: measure-margin($size);
+	@if ($webfont) {
 
-  }
-  @if ($weight) {
-    font-weight: $weight;
-  }
-  @if ($style) {
-    font-style: $style;
-  }
+		$class: to_lower_case($family);
+
+		@if ($weight) {
+			$class: $class + '-' + $weight;
+		}
+
+		@if ($style) {
+			$class: $class + '-' + $style;
+		}
+
+		font-family: $font-main;
+
+		.#{$class} & {
+			font-family: $family, $font-main;
+		}
+
+	}
+	@else {
+		font-family: $family, $font-main;
+	}
+
+	@if ($size) {
+		@include x-rem($size);
+		//margin-bottom: measure-margin($size);
+	}
+	@if ($weight) {
+		font-weight: $weight;
+	}
+	@if ($style) {
+		font-style: $style;
+	}
 }
+
 
 // For adding icons to elements using CSS pseudo-elements
 // Source: http://jaydenseric.com/blog/fun-with-sass-and-font-icons
@@ -145,4 +158,110 @@
     .no-svg & {
       background-image: image-url('png/$filename' + $extension);
     }
+}
+
+
+// @mixin checkbox
+//
+// Markup needs to be input + label in sourceorder for this thing to work
+//
+// $height,
+// $width,
+// $labelcolor: $grey,
+// $position: "right",
+// $content: "×"
+//
+
+@mixin checkbox( $height, $width, $labelcolor, $color, $position: 'left', $content: "") {
+
+	@extend %vh;
+
+	+ label {
+		color: $labelcolor;
+		position: relative;
+		padding: 0.5em;
+		vertical-align: middle;
+		user-select: none;
+
+		@if $position == "right" {
+			padding-right: $width+10;
+			margin-right: 6px;
+		}
+
+		@else if $position == "left" {
+			padding-left: $width+10;
+			margin-left: 6px;
+		}
+
+		&:before {
+			content: '';
+			color: $color;
+			position: absolute;
+			top: 45%;
+			transform: translateY(-50%);
+
+			@if $position == "right" {
+				right: 0;
+			}
+
+			@else if $position == "left" {
+				left: 0;
+			}
+
+			width: $width;
+			height: $height;
+			border: 1px solid $grey;
+			background: $white;
+			font-size: 18px;
+			line-height: 21px;
+			text-align: center;
+			border-radius: 3px;
+			box-shadow: 1px 1px 1px rgba($black,.1) inset;
+		}
+	}
+
+	&:checked {
+		+ label {
+			color: $black;
+
+			&:before {
+				content: $content;
+				font-size: $base-fontsize;
+				line-height: $base-lineheight;
+				text-align: center;
+				text-transform: uppercase;
+			}
+		}
+	}
+
+	// Include any extra rules supplied
+	@content;
+}
+
+
+// @mixin maxlines
+//
+// Set calculated max height of element
+//
+// @param int $height (max lines of text)
+// @param int $fz (default: $base-fontsize)
+// @param int $lh (default: $base-lineheight)
+//
+// @return value in em
+//
+// EXAMPLE:
+//
+// h1 {
+//   @include maxlines(3);
+// }
+@mixin maxlines($height, $property: height, $fz: $base-fontsize, $lh: $base-lineheight, $pt: 0, $pb: 0, $truncated: false) {
+	$padtop: em($pt);
+	$padbot: em($pb);
+
+	overflow: hidden;
+	#{$property}: $height * (strip-units($lh / $fz)) * 1em + $padtop + $padbot;
+
+	@if ($truncated) {
+		@extend %cropped-text;
+	}
 }
