@@ -143,7 +143,7 @@ module.exports = function(grunt) {
 				"classPrefix": "no",
 				"parseFiles": true,
 				"customTests": [],
-				"devFile": "<%= srcDir %>/js/vendor/modernizr-dev.js",
+				"devFile": false, //"<%= srcDir %>/js/vendor/modernizr-dev.js",
 				//"outputFile": "<%= srcDir %>/js/vendor/_modernizr.js",
 				"excludeTests": [
 					"opacity",
