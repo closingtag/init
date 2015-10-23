@@ -42,14 +42,14 @@
 // To simulate associative arrays
 // Source: http://hugogiraudel.com/2013/08/12/sass-functions/#mapping
 @function match($haystack, $needle) {
-  @each $item in $haystack {
-    $index: index($item, $needle);
-    @if $index {
-      $return: if($index == 1, 2, $index);
-      @return nth($item, $return);
-    }
-  }
-  @return false;
+	@each $item in $haystack {
+	$index: index($item, $needle);
+	@if $index {
+		$return: if($index == 1, 2, $index);
+		@return nth($item, $return);
+	}
+	}
+	@return false;
 }
 
 // @function measure-margin
@@ -57,82 +57,79 @@
 // -------------------------------------//
 // divide 1 unit of measure by given font-size & return a relative em value
 @function measure-margin($font-size: $base-fontsize, $line-height: $base-lineheight, $value: em) {
-  @return (strip-units($font-size) / ($line-height * strip-units($base-fontsize)))#{$value};
+	@return (strip-units($font-size) / ($line-height * strip-units($base-fontsize)))#{$value};
 }
 
 // Add percentage of white to a color
 @function tint($color, $percent){
-  @return mix(white, $color, $percent);
+	@return mix(white, $color, $percent);
 }
 
 // Add percentage of black to a color
 @function shade($color, $percent){
-  @return mix(black, $color, $percent);
+	@return mix(black, $color, $percent);
 }
 
 
-/**
-*  Converts photoshop line height (leading) to pixels
-*
-*  @param int $font-size
-*  @param int $leading
-*
-*  @return relative value
-*
-*  EXAMPLE:
-*  p {
-*    line-height: line-height(44px, 54px);
-*  }
-**/
+
+// Converts photoshop line height (leading) to pixels
+//
+// @param int $font-size
+// @param int $leading
+//
+// @return relative value
+//
+// EXAMPLE:
+// p {
+//   line-height: line-height(44px, 54px);
+// }
+
 
 @function line-height($target, $context){
-  @return strip-units($target) / strip-units($context);
+	@return strip-units($target) / strip-units($context);
 }
 
-/**
-*  Converts photoshop letter spacing to pixels
-*  Spacing is divided by 1000 which gives an em value
-*  this is then mutplied by default browser fontsize (typically 16px)
-*
-*  @param int $spacing
-*  @param int $context (default: $base-fontsize)
-*
-*  @return em value
-*
-*  EXAMPLE:
-*  p {
-*    letter-spacing: letter-spacing(100px);
-*  }
-**/
+
+// Converts photoshop letter spacing to pixels
+// Spacing is divided by 1000 which gives an em value
+// this is then mutplied by default browser fontsize (typically 16px)
+//
+// @param int $spacing
+// @param int $context (default: $base-fontsize)
+//
+// @return em value
+//
+// EXAMPLE:
+// p {
+//   letter-spacing: letter-spacing(100px);
+// }
+
 @function letter-spacing($spacing, $context: $base-fontsize){
-  @return (strip-units($spacing)/1000) * strip-units($context) * 1em;
+	@return (strip-units($spacing)/1000) * strip-units($context) * 1em;
 }
 
 
-/**
-*  convert px font-size to viewport-width (vw)
-*  Read the article: http://sassbreak.com/viewport-relative-headings-with-sass
-*
-*  @param int $target
-*  @param int $context (calculate context based on $page-max value)
-*
-*  @return vw value
-*
-*  EXAMPLE:
-*  h1 {
-*    @include vw(72px);
-*  }
-**/
+// convert px font-size to viewport-width (vw)
+// Read the article: http://sassbreak.com/viewport-relative-headings-with-sass
+//
+// @param int $target
+// @param int $context (calculate context based on $page-max value)
+//
+// @return vw value
+//
+// EXAMPLE:
+// h1 {
+//   @include vw(72px);
+// }
 
 @function vw($target) {
-  $context: strip-units(($page-max * .01) * 1px);
-  @return (strip-units($target) / $context) * 1vw;
+	$context: strip-units(($page-max * .01) * 1px);
+	@return (strip-units($target) / $context) * 1vw;
 }
 
 // // Mixin
 // @mixin vw($size) {
 //   font-size: get-vw($size);
-
 //   // If the width of the viewport is 1025px or wider, the font size will remain at 72px. Otherwise, the value will adjust as 7.2vw.
 //   @media #{$wide-screen} {
 //     font-size: $size;
@@ -142,60 +139,55 @@
 
 
 
+// Asset helper
+// via http://css-tricks.com/snippets/sass/simple-asset-helper-functions/
+//
+//
+// USAGE:
+//
+// @font-face {
+//   font-family: 'Unicorn Font';
+//   src: font('unicorn.eot?') format('eot'),
+//        font('unicorn.otf') format('truetype'),
+//        font('unicorn.woff') format('woff'),
+//        font('unicorn.svg#unicorn') format('svg');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+//
+// .foo {
+//   background-image: image('kittens.png');
+// }
 
-/*
- * Asset helper
- * via http://css-tricks.com/snippets/sass/simple-asset-helper-functions/
- *
-
-USAGE:
-
-@font-face {
-  font-family: 'Unicorn Font';
-  src: font('unicorn.eot?') format('eot'),
-       font('unicorn.otf') format('truetype'),
-       font('unicorn.woff') format('woff'),
-       font('unicorn.svg#unicorn') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-.foo {
-  background-image: image('kittens.png');
-}
- *
- *
- */
-
-/// Base path for assets (fonts, images...),
-/// should not include trailing slash
-/// @access public
-/// @type String
+// Base path for assets (fonts, images...),
+// should not include trailing slash
+// @access public
+// @type String
 $asset-base-path: '../' !default;
 
-/// Asset URL builder
-/// @access private
-/// @param {String} $type - Asset type, matching folder name
-/// @param {String} $file - Asset file name, including extension
-/// @return {URL} - A `url()` function leading to the asset
+// Asset URL builder
+// @access private
+// @param {String} $type - Asset type, matching folder name
+// @param {String} $file - Asset file name, including extension
+// @return {URL} - A `url()` function leading to the asset
 @function asset($type, $file) {
-  @return url($asset-base-path + '/' + $type + '/' + $file);
+	@return url($asset-base-path + '/' + $type + '/' + $file);
 }
 
-/// Image asset helper
-/// @access public
-/// @param {String} $file - Asset file name, including extension
-/// @return {URL} - A `url()` function leading to the image
-/// @require {function} asset
+// Image asset helper
+// @access public
+// @param {String} $file - Asset file name, including extension
+// @return {URL} - A `url()` function leading to the image
+// @require {function} asset
 @function image($file) {
-  @return asset('img', $file);
+	@return asset('img', $file);
 }
 
-/// Font asset helper
-/// @access public
-/// @param {String} $file - Asset file name, including extension
-/// @return {URL} - A `url()` function leading to the font
-/// @require {function} asset
+// Font asset helper
+// @access public
+// @param {String} $file - Asset file name, including extension
+// @return {URL} - A `url()` function leading to the font
+// @require {function} asset
 @function font($file) {
-  @return asset('fonts', $file);
+	@return asset('fonts', $file);
 }

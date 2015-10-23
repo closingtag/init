@@ -6,6 +6,13 @@ a[href], button {
 	touch-action: manipulation;
 }
 
+a > *,
+[role="button"] > *,
+button > * {
+	pointer-events: none;
+}
+
+
 // Add a placeholder for focus events so we can manage
 // both global and button styles.
 %focus {
@@ -40,6 +47,21 @@ a[href], button {
 
 [aria-hidden="true"] {
 	display: none;
+}
+
+// specify the progress cursor of updating elements
+[aria-busy="true"] {
+	cursor: progress;
+}
+
+// specify the pointer cursor of trigger elements
+[aria-controls] {
+	cursor: pointer;
+}
+
+// specify the unstyled cursor of disabled, not-editable, or otherwise inoperable elements
+[aria-disabled] {
+	cursor: default;
 }
 
 p,
@@ -144,9 +166,3 @@ path {
 // svg[height="50"] {
 //   height: 50px;
 // }
-
-a > *,
-[role="button"] > *,
-button > * {
-	pointer-events: none;
-}

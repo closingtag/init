@@ -69,12 +69,23 @@
 	display: block;
 }
 
-%button-base {
-	border-radius: $radius;
+// will reset buttons styles
+%reset-button {
+	appearance: button;
 	border: none;
-	display: inline-block;
-	text-decoration: none;
-	padding: .25em 1em;
+	padding: 0;
+	cursor: pointer;
+	overflow: visible; // removes padding in IE
+
+	// reset button bg and radius in FF for Android
+	border-radius: 0;
+	background-image: none;
+
+	&::-moz-focus-inner {
+		// removes padding in Firefox
+		border: none;
+		padding: 0;
+	}
 }
 
 %transform-center {

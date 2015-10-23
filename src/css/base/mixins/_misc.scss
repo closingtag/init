@@ -75,14 +75,13 @@
 		.#{$class} & {
 			font-family: $family, $font-main;
 		}
-
 	}
 	@else {
 		font-family: $family, $font-main;
 	}
 
 	@if ($size) {
-		@include x-rem($size);
+		font-size: rem($size);
 		//margin-bottom: measure-margin($size);
 	}
 	@if ($weight) {
