@@ -140,15 +140,33 @@ module.exports = function(grunt) {
 		// Modernizr
 		modernizr: {
 			build: {
-				devFile: 'remote',
-				outputFile: '<%= srcDir %>/js/vendor/_modernizr.js',
-				extra: {
-					mq: true
-				},
-				uglify: false,
+				"classPrefix": "no",
+				"parseFiles": true,
+				"customTests": [],
+				"devFile": "<%= srcDir %>/js/vendor/modernizr-dev.js",
+				//"outputFile": "<%= srcDir %>/js/vendor/_modernizr.js",
+				"excludeTests": [
+					"opacity",
+					"hidden",
+					"html5printshiv"
+				],
+				"tests": [
+					//"flexbox"
+					// "pointerevents"
+				],
+				"enableClasses": true,
+				"options": [
+					"setClasses"
+				],
+				"extensibility": [
+					"mq",
+					"setClasses"
+				],
+				"uglify": true,
 				files: {
 					src: ['<%= srcDir %>/**/*.js','<%= srcDir %>/**/*.scss','!<%= srcDir %>/js/vendor/*.js']
-				}
+				},
+				dest: "<%= srcDir %>/js/vendor/_modernizr-custom.js"
 			}
 		},
 
@@ -283,7 +301,7 @@ module.exports = function(grunt) {
 				helpers: ['handlebars-helper-repeat','<%= srcDir %>/templates/helpers/**/*.js'],
 				layout: 'default.hbs',
 				layoutdir: '<%= srcDir %>/templates/layouts',
-				partials: ['<%= srcDir %>/templates/partials/**/*.hbs','<%= srcDir %>/templates/patterns/atoms/**/*.hbs','<%= srcDir %>/templates/patterns/molecules/**/*.hbs'],
+				partials: ['<%= srcDir %>/templates/partials/**/*.hbs'],
 
 				// Pattern Lab templates
 				// patterns: {
@@ -347,17 +365,6 @@ module.exports = function(grunt) {
 					dest: '<%= distDir %>/'
 				}]
 			}
-		},
-
-		// SVG to PNG
-		svg2png: {
-			files: [{
-				cwd: '<%= srcDir %>/img/',
-				src: ['**/*.svg'],
-				dest: '<%= distDir %>/img/png/',
-				ext: '*.png',
-				expand: false
-			}]
 		},
 
 		// SVG store SVG sprites
@@ -438,17 +445,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// Phantomas performance monitoring
-		phantomas: {
-			all: {
-				options: {
-					indexPath: './phantomas/',
-					numberOfRuns: 5,
-					url: 'http://localhost:3000/'
-				}
-			}
-		},
-
 		// critical
 		critical: {
 			test: {
@@ -499,7 +495,6 @@ module.exports = function(grunt) {
 		'sass:dev',
 		'autoprefixer:dev',
 		'svgstore:dev',
-		//'svg2png',
 		'sync:img',
 		'sync:fonts',
 		'js',
@@ -537,7 +532,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('perf', [], function () {
 			grunt.task.run(
 				'critical',
-				'phantomas',
 				'perfbudget'
 			);
 	});
