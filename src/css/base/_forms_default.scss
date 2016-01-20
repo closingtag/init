@@ -82,7 +82,15 @@ form {
 //   width: 100%;
 // }
 
-$form_placeholder_prefixes: ('::-webkit-input-placeholder', ':-moz-placeholder', '::-moz-placeholder', ':-ms-input-placeholder', '::input-placeholder', '::placeholder' );
+
+$form_placeholder_prefixes: (
+	'::-webkit-input-placeholder',
+	':-moz-placeholder',
+	'::-moz-placeholder',
+	':-ms-input-placeholder',
+	'::-ms-input-placeholder',
+	'::placeholder',
+	':placeholder-shown' );
 @each $prefix in $form_placeholder_prefixes {
 
 	input[placeholder]#{$prefix},
@@ -96,6 +104,8 @@ $form_placeholder_prefixes: ('::-webkit-input-placeholder', ':-moz-placeholder',
 		color: transparent !important;
 	}
 }
+
+
 
 fieldset {
 
