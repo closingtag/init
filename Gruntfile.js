@@ -48,14 +48,18 @@ module.exports = function(grunt) {
 		},
 
 		// autoprefixer
-		autoprefixer: {
+		postcss: {
 			options: {
-				browsers: '<%= autopref %>'
+				map: {
+					inline: false,
+					annotation: '<%= devDir %>/css/maps/'
+				},
+
+				processors: [
+					require('autoprefixer')({browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3']})
+				]
 			},
 			dev: {
-				options: {
-					map: true
-				},
 				src: ['<%= devDir%>/css/*.css','!all-old-ie.css']
 			},
 			dist: {
@@ -140,19 +144,20 @@ module.exports = function(grunt) {
 		// Modernizr
 		modernizr: {
 			build: {
-				"classPrefix": "no",
+				//"classPrefix": "bla-",
 				"parseFiles": true,
 				"customTests": [],
-				"devFile": false, //"<%= srcDir %>/js/vendor/modernizr-dev.js",
-				//"outputFile": "<%= srcDir %>/js/vendor/_modernizr.js",
+				"devFile": false,
 				"excludeTests": [
 					"opacity",
 					"hidden",
-					"html5printshiv"
+					"html5printshiv",
+					"time",
+					"svg"
 				],
 				"tests": [
 					//"flexbox"
-					// "pointerevents"
+					//"pointerevents"
 				],
 				"enableClasses": true,
 				"options": [
@@ -261,7 +266,7 @@ module.exports = function(grunt) {
 			},
 			sass: {
 				files: ['<%= srcDir %>/css/**/*'],
-				tasks: ['sass:dev', 'autoprefixer:dev',]
+				tasks: ['sass:dev', 'postcss:dev',]
 			},
 			assemble: {
 				files: ['<%= srcDir %>/templates/**/*.hbs', '<%= srcDir %>/templates/data/*.json', '<%= srcDir %>/templates/data/*.yml'],
@@ -493,7 +498,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [
 		'clean:dev',
 		'sass:dev',
-		'autoprefixer:dev',
+		'postcss:dev',
 		'svgstore:dev',
 		'sync:img',
 		'sync:fonts',
@@ -508,7 +513,7 @@ module.exports = function(grunt) {
 		'clean:dist',
 		'sync:fontsdist',
 		'sass:dist',
-		'autoprefixer:dist',
+		'postcss:dist',
 		'critical',
 		'modernizr:build',
 		'sync:jsdist',
