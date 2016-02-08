@@ -47,7 +47,6 @@ module.exports = function(grunt) {
 			},
 		},
 
-		// autoprefixer
 		postcss: {
 			options: {
 				map: {
@@ -56,7 +55,14 @@ module.exports = function(grunt) {
 				},
 
 				processors: [
-					require('autoprefixer')({browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3']})
+					require('autoprefixer')({browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3']}),
+					require('postcss-assets')({ loadPaths: ['src/img/'], relativeTo: 'css'}),
+					require('postcss-svg')({paths: ['.']}),
+					//require('postcss-flexbugs-fixes'),
+					// require('doiuse')({
+					// 	browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3'],
+					// 	ignore: ['rem', 'css-boxshadow', 'css-transitions']
+					// })
 				]
 			},
 			dev: {
