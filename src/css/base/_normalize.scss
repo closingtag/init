@@ -350,7 +350,8 @@ html input[disabled] {
 	cursor: default;
 }
 
-input {
+input,
+select {
 	line-height: normal;
 }
 
