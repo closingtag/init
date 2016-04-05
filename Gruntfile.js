@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(grunt) {
-
+	var mozjpeg = require('imagemin-mozjpeg');
 	require('jit-grunt')(grunt, {
 		assemble: 'assemble'
 	});
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 		devDir: '.tmp',
 		srcDir: 'src',
 		distDir: 'dist',
-		autopref: ['last 2 version', 'ie >= 9', 'Android >= 2.3'],
+		autopref: ['last 2 version', 'ie >= 11', 'Android >= 4.4'],
 
 
 		// Sass
@@ -55,7 +55,6 @@ module.exports = function(grunt) {
 				},
 
 				processors: [
-					require('autoprefixer')({browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3']}),
 					require('postcss-assets')({ loadPaths: ['src/img/'], relativeTo: 'css'}),
 					require('postcss-svg')({paths: ['.']}),
 					//require('postcss-flexbugs-fixes'),
@@ -63,6 +62,7 @@ module.exports = function(grunt) {
 					// 	browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3'],
 					// 	ignore: ['rem', 'css-boxshadow', 'css-transitions']
 					// })
+					require('autoprefixer')({browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3']})
 				]
 			},
 			dev: {
@@ -262,10 +262,6 @@ module.exports = function(grunt) {
 				files: ['<%= srcDir %>/js/**/*'],
 				tasks: ['modernizr:build','sync:js','includes:dev', 'jshint']
 			},
-			svg: {
-				files: ['<%= srcDir %>/img/**/*.svg'],
-				tasks: ['svg2png:dev']
-			},
 			img: {
 				files: ['<%= srcDir %>/img/**/*'],
 				tasks: ['sync:img']
@@ -391,7 +387,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-				'<%= distDir %>/img/all.svg': ['<%= srcDir %>/img/icons/*.svg']
+					'<%= distDir %>/img/all.svg': ['<%= srcDir %>/img/icons/*.svg']
 				}
 			}
 		},
@@ -440,6 +436,22 @@ module.exports = function(grunt) {
 					expand: true,
 					ext: '.svg',
 					src: ['*.svg']
+				}]
+			}
+		},
+		// imagemin JPGs
+		imagemin: {
+			options: {
+				optimizationLevel: 3,
+				svgoPlugins: [{ removeViewBox: false }],
+				use: [mozjpeg()]
+			},
+			dist: {
+				files: [{
+					expand: true,
+					cwd: '<%= srcDir %>/img/',
+					src: ['**/*.jpg'],
+					dest: '<%= distDir %>/img'
 				}]
 			}
 		},
@@ -497,8 +509,8 @@ module.exports = function(grunt) {
 		'modernizr:build',
 		'sync:js',
 		'includes:dev',
-		'jshint']
-	);
+		'jshint'
+	]);
 
 	// default / development task
 	grunt.registerTask('default', [
@@ -520,7 +532,6 @@ module.exports = function(grunt) {
 		'sync:fontsdist',
 		'sass:dist',
 		'postcss:dist',
-		'critical',
 		'modernizr:build',
 		'sync:jsdist',
 		'includes:dist',
@@ -531,12 +542,10 @@ module.exports = function(grunt) {
 
 	// dist image task
 	grunt.registerTask('dist-img', [
-		'clean:distimg',
-		'svg2png',
-		'sync:imgdist',
+		//'clean:distimg',
+		'newer:imagemin:dist',
 		'svgstore:dist',
-		'svgmin:all',
-		'imageoptim'
+		'svgmin:all'
 	]);
 
 	// performance task
