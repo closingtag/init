@@ -24,3 +24,5 @@
 .link-to-navigation {
 
 }
+
+a[href$=".pdf"]::after {content: " (PDF)"; }
