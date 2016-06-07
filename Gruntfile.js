@@ -1,6 +1,9 @@
 'use strict';
 module.exports = function(grunt) {
 	var mozjpeg = require('imagemin-mozjpeg');
+	var pngquant = require('imagemin-pngquant');
+	var pngcrush = require('imagemin-pngcrush');
+
 	require('jit-grunt')(grunt, {
 		assemble: 'assemble'
 	});
@@ -11,7 +14,32 @@ module.exports = function(grunt) {
 		devDir: '.tmp',
 		srcDir: 'src',
 		distDir: 'dist',
-		autopref: ['last 2 version', 'ie >= 11', 'Android >= 4.4'],
+
+		// imagemin
+		imagemin: {
+			options: {
+				optimizationLevel: 3,
+				pngcrush: [{reduce: true}],
+				svgoPlugins: [{ removeViewBox: false }],
+				use: [pngquant(), pngcrush(), mozjpeg()]
+			},
+			dev: {
+				files: [{
+					expand: true,
+					cwd: '<%= devDir %>/img/',
+					src: ['**/*.{png,jpg,gif}'],
+					dest: '<%= devDir %>/img/'
+				}]
+			},
+			dist: {
+				files: [{
+					expand: true,
+					cwd: '<%= distDir %>/img/',
+					src: ['**/*.{png,jpg,gif}'],
+					dest: '<%= distDir %>/img/'
+				}]
+			}
+		},
 
 
 		// Sass
@@ -23,7 +51,8 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					outputStyle: 'expanded',
-					//includePaths: ['~/.gem/ruby/2.0.0/gems/singularitygs-1.4.0/stylesheets','~/.gem/ruby/2.0.0/gems/breakpoint-2.5.0/stylesheets']
+					sourceMap: true,
+					sourceMapContents: true
 				},
 				files: [{
 					expand: true,
@@ -50,8 +79,7 @@ module.exports = function(grunt) {
 		postcss: {
 			options: {
 				map: {
-					inline: false,
-					annotation: '<%= devDir %>/css/maps/'
+					map: true
 				},
 
 				processors: [
@@ -62,7 +90,7 @@ module.exports = function(grunt) {
 					// 	browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3'],
 					// 	ignore: ['rem', 'css-boxshadow', 'css-transitions']
 					// })
-					require('autoprefixer')({browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3']})
+					require('autoprefixer')({browsers: ['last 2 versions', 'ie >= 11', 'Android >= 4.4']})
 				]
 			},
 			dev: {
@@ -130,7 +158,7 @@ module.exports = function(grunt) {
 			dev: {
 				files: [{
 					filter: 'isFile',
-					src: ['<%= devDir %>/**/*']
+					src: ['<%= devDir %>/**/*', '!<%= devDir %>/**/*.{jpg,png,svg}']
 				}]
 			},
 			dist: {
@@ -295,6 +323,9 @@ module.exports = function(grunt) {
 					ghostMode: false,
 					open: "external",
 					notify: false,
+					reloadDelay: 1000,
+					reloadDebounce: 1000,
+					directory: true
 					// tunnel: true,
 					// xip: true
 				}
@@ -305,7 +336,7 @@ module.exports = function(grunt) {
 		assemble: {
 			options: {
 				data: '<%= srcDir %>/templates/data/**/*.{json,yml}',
-				helpers: ['handlebars-helper-repeat','<%= srcDir %>/templates/helpers/**/*.js'],
+				helpers: ['<%= srcDir %>/templates/helpers/**/*.js'],
 				layout: 'default.hbs',
 				layoutdir: '<%= srcDir %>/templates/layouts',
 				partials: ['<%= srcDir %>/templates/partials/**/*.hbs'],
@@ -390,114 +421,8 @@ module.exports = function(grunt) {
 					'<%= distDir %>/img/all.svg': ['<%= srcDir %>/img/icons/*.svg']
 				}
 			}
-		},
-
-		// Optimizing SVG-files
-		svgmin: {
-			options: {
-				plugins: [
-					{ cleanupAttrs: true },
-					{ cleanupEnableBackground: true },
-					{ cleanupIDs: false },
-					{ cleanupNumericValues: true },
-					{ collapseGroups: true },
-					{ convertColors: true },
-					{ convertPathData: true },
-					{ convertShapeToPath: true },
-					{ convertStyleToAttrs: true },
-					{ convertTransform: true },
-					{ mergePaths: true },
-					{ moveElemsAttrsToGroup: true },
-					{ moveGroupAttrsToElems: true },
-					{ removeComments: true },
-					{ removeDoctype: true },
-					{ removeEditorsNSData: true },
-					{ removeEmptyAttrs: true },
-					{ removeEmptyContainers: true },
-					{ removeEmptyText: true },
-					{ removeHiddenElems: true },
-					{ removeMetadata: true },
-					{ removeNonInheritableGroupAttrs: true },
-					{ removeRasterImages: true },
-					{ removeTitle: false },
-					{ removeUnknownsAndDefaults: true },
-					{ removeUnusedNS: true },
-					{ removeUselessStrokeAndFill: false }, // Enabling this may cause small details to be removed
-					{ removeViewBox: false }, // Keep the viewBox because that's where illustrator hides the SVG dimensions
-					{ removeXMLProcInst: false }, // Enabling this breaks grunticon because it removes the XML header
-					{ sortAttrs: true },
-					{ transformsWithOnePath: false } // Enabling this breaks Illustrator SVGs with complex text
-				]
-			},
-			all: {
-				files: [{
-					cwd: '<%= distDir %>/img/',
-					dest: '<%= distDir %>/img/',
-					expand: true,
-					ext: '.svg',
-					src: ['*.svg']
-				}]
-			}
-		},
-		// imagemin JPGs
-		imagemin: {
-			options: {
-				optimizationLevel: 3,
-				svgoPlugins: [{ removeViewBox: false }],
-				use: [mozjpeg()]
-			},
-			dist: {
-				files: [{
-					expand: true,
-					cwd: '<%= srcDir %>/img/',
-					src: ['**/*.jpg'],
-					dest: '<%= distDir %>/img'
-				}]
-			}
-		},
-
-		// imageoptim
-		imageoptim: {
-			options: {
-				jpegMini: false,
-				imageAlpha: true,
-				quitAfter: true
-			},
-			pngs: {
-				src: ['<%= distDir %>/img']
-			}
-		},
-
-		// critical
-		critical: {
-			test: {
-				options: {
-					base: './',
-					css: ['<%= devDir %>/css/style.css'],
-					width : 1024,
-					height : 768,
-					minify: true
-				},
-				src: '<%= devDir %>/index.html',
-				dest: '<%= devDir %>/critical.html'
-			}
-		},
-
-		// perfbudget
-		perfbudget: {
-			default: {
-				options: {
-					url: 'http://localhost:3000',
-					key: 'A.5049c22c24f4c81f408a62711c938f78',
-					location: 'ec2-eu-central-1:Chrome',
-					timeout: 600,
-					budget: {
-						visualComplete: '3000',
-						SpeedIndex: '1000'
-					}
-				}
-			}
 		}
+
 	});
 
 
@@ -544,16 +469,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('dist-img', [
 		//'clean:distimg',
 		'newer:imagemin:dist',
-		'svgstore:dist',
-		'svgmin:all'
+		'svgstore:dist'
 	]);
-
-	// performance task
-	grunt.registerTask('perf', [], function () {
-			grunt.task.run(
-				'critical',
-				'perfbudget'
-			);
-	});
 
 };
