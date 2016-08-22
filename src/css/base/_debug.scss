@@ -4,6 +4,13 @@
 
 @include sgs-change("debug", true);
 
+// find all elements that break viewport / Unintended Body Overflow
+* {
+	outline: 1px solid red;
+	opacity: 1 !important;
+	visibility: visible !important;
+}
+
 /*------------------------------------*\
     $DEBUG
 \*------------------------------------*/
