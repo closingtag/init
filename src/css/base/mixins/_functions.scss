@@ -74,8 +74,8 @@
 
 // Converts photoshop line height (leading) to pixels
 //
-// @param int $font-size
-// @param int $leading
+// @param int $target
+// @param int $context (default: $base-fontsize)
 //
 // @return relative value
 //
@@ -84,11 +84,16 @@
 //   line-height: line-height(44px, 54px);
 // }
 
-
-@function line-height($target, $context){
-	@return strip-units($target) / strip-units($context);
+@function line-height($target, $context: $base-fontsize){
+	@if (unitless($target)) {
+		@return $target;
+	} @else if unit($target) == "px" {
+		@return strip-units($target) / strip-units($context);
+	} @else {
+		@warn "Not a number value: #{$target}";
+		@return $target;
+	}
 }
-
 
 // Converts photoshop letter spacing to pixels
 // Spacing is divided by 1000 which gives an em value
