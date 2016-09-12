@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(grunt) {
-	var mozjpeg = require('imagemin-mozjpeg');
+	var mozjpeg  = require('imagemin-mozjpeg');
 	var pngquant = require('imagemin-pngquant');
 	var pngcrush = require('imagemin-pngcrush');
 
@@ -44,10 +44,6 @@ module.exports = function(grunt) {
 
 		// Sass
 		sass: {
-			options: {
-				//bundleExec: true,
-				//includePaths: ['/Users/svenwolfermann/.gem/ruby/2.0.0/gems/singularitygs-1.4.0/stylesheets','/Users/svenwolfermann/.gem/ruby/2.0.0/gems/breakpoint-2.5.0/stylesheets']
-			},
 			dev: {
 				options: {
 					outputStyle: 'expanded',
@@ -64,7 +60,8 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				options: {
-					outputStyle: 'compressed'
+					outputStyle: 'compressed',
+					sourceMap: false
 				},
 				files: [{
 					expand: true,
@@ -78,25 +75,20 @@ module.exports = function(grunt) {
 
 		postcss: {
 			options: {
-				map: {
-					map: true
-				},
-
 				processors: [
-					require('postcss-assets')({ loadPaths: ['src/img/'], relativeTo: 'css'}),
-					require('postcss-svg')({paths: ['.']}),
-					//require('postcss-flexbugs-fixes'),
-					// require('doiuse')({
-					// 	browsers: ['last 2 version', 'ie >= 9', 'Android >= 2.3'],
-					// 	ignore: ['rem', 'css-boxshadow', 'css-transitions']
-					// })
 					require('autoprefixer')({browsers: ['last 2 versions', 'ie >= 11', 'Android >= 4.4']})
 				]
 			},
 			dev: {
+				map: {
+					map: true
+				},
 				src: ['<%= devDir%>/css/*.css','!all-old-ie.css']
 			},
 			dist: {
+				map: {
+					map: false
+				},
 				src: ['<%= distDir %>/css/*.css','!all-old-ie.css']
 			}
 		},
