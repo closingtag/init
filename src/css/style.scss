@@ -1,2 +1,389 @@
 // style.scss
 @import "master";
+
+$gridgap: 12px;
+
+.bs-grid {
+	box-sizing: border-box;
+	display: grid;
+	grid-gap: $gridgap;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	// grid-template-columns:
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)))
+	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)));
+
+	grid-template-rows: auto;
+}
+
+.bs-grid1 {
+	display: grid;
+	grid-column-gap: $gridgap;
+	grid-template-columns: repeat(12, 1fr);
+}
+
+@for $i from 1 through 12 {
+	.col#{$i} {
+		grid-column: $i / span 1;
+		background-color: rgba(10,10,10,0.3);
+		color: #fff;
+		padding: 1rem;
+		text-align: center;
+		// prevent overflow
+		// max-width: 100%;
+		// overflow: hidden;
+	}
+}
+
+.bs-grid2 {
+	// demo
+		margin: 2rem 0;
+	//\demo
+
+	@include breakpoint(600px) {
+		display: grid;
+		grid-gap: $gridgap;
+		grid-template-columns: repeat(12, calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12))));
+		grid-template-areas: "header header header header header header header header header header header header ";
+	}
+
+	> * {
+		background-color: rgba(10,10,10,0.3);
+		color: #fff;
+		padding: 2rem;
+	}
+
+	header {
+		grid-area: header;
+	}
+
+	footer {
+		grid-column-start: 1;
+		grid-column-end: 13;
+		grid-row-start: 3;
+		grid-row-end: 4;
+	}
+
+	main {
+		grid-column: 1 / span 8;
+		grid-row: 2 / span 1;
+	}
+
+	aside {
+		grid-area: 2 / 9 / 3 / 13;
+	}
+}
+
+.bs-grid3 {
+
+	@include breakpoint(600px) {
+		display: grid;
+		grid-template-columns: 10% 15% 20% 25% 30%;
+
+		// grid lines demo
+		background-image: linear-gradient(
+			to right,
+			rgba(10,10,10,0.2) 0%,
+			rgba(10,10,10,0.0) 0.1%,
+			rgba(10,10,10,0.0) 10%,
+			rgba(10,10,10,0.2) 10%,
+			rgba(10,10,10,0.0) 10.1%,
+			rgba(10,10,10,0.0) 25%,
+			rgba(10,10,10,0.2) 25%,
+			rgba(10,10,10,0.0) 25.1%,
+			rgba(10,10,10,0.0) 45%,
+			rgba(10,10,10,0.2) 45%,
+			rgba(10,10,10,0.0) 45.1%,
+			rgba(10,10,10,0.0) 70%,
+			rgba(10,10,10,0.2) 70%,
+			rgba(10,10,10,0.0) 70.1%,
+			rgba(10,10,10,0.0) 99.9%,
+			rgba(10,10,10,0.2) 100%
+			);
+		background-repeat: repeat-y;
+
+	}
+
+	> * {
+		//background-color: rgba(10,10,10,0.3);
+		color: #fff;
+		padding: 2rem;
+	}
+
+	// demo-styling
+	&.demo-styling {
+		margin: 2rem 0;
+
+		> * {
+			color: #222;
+			padding: 0.5rem;
+		}
+	}
+
+	.headline {
+		grid-column: 2 / span 3;
+		grid-row: 1 / span 1;
+		align-self: center;
+
+		line-height: 1.2;
+		padding-top: 1em;
+		padding-bottom: 1em;
+
+		position: relative;
+		z-index: 1;
+
+		&:before {
+			content: '';
+			display: block;
+			height: 1em;
+			margin-bottom: 1em;
+			width: 100%;
+			background-color: #000;
+			margin-left: -17%; // guessed
+		}
+	}
+
+	.image-wrapper {
+		grid-column: 4 / span 2;
+		grid-row: 1 / span 1;
+
+		// demo
+		background-color: #bebebe;
+		background-clip: content-box;
+
+		min-height: 300px;
+	}
+
+	.text-block {
+		grid-column: 2 / span 3;
+	}
+
+	.image-teaser {
+
+		grid-column: 5 / span 1;
+
+		// @include breakpoint($xlarge) {
+		// 	grid-column: 5 / span 1;
+		// }
+
+		// demo
+		background-color: #bebebe;
+		background-clip: content-box;
+
+	}
+
+	.ad {
+
+		background-color: #bebebe;
+		background-clip: content-box;
+		padding: 0.5em;
+	}
+
+
+	h1 {
+		font-size: 2rem;
+
+		@include breakpoint($large) {
+			font-size: 4rem;
+		}
+	}
+}
+
+
+[class*="grid__"] {
+	background-color: rgba(10,10,10,0.3);
+	color: #fff;
+	padding: 25px;
+	font-size: 1em;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 0.25fr 1em 0.75fr;
+	grid-template-rows: auto 1em auto 1em auto 1em auto;
+
+
+	&__header {
+		grid-column-start: 1;
+		grid-column-end: 4;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+
+	&__footer {
+		grid-column-start: 1;
+		grid-column-end: 4;
+		grid-row-start: 7;
+		grid-row-end: 8;
+	}
+
+	&__sidebar {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 3;
+		grid-row-end: 6;
+	}
+
+	&__content {
+		grid-column-start: 3;
+		grid-column-end: 4;
+		grid-row-start: 3;
+		grid-row-end: 4;
+
+		// demo
+		min-height: 300px;
+	}
+
+	&__extra {
+		grid-column-start: 3;
+		grid-column-end: 4;
+		grid-row-start: 5;
+		grid-row-end: 6;
+	}
+}
+
+.grid3 {
+
+	@media (min-width: 750px) {
+		display: grid;
+		grid-gap: 12px;
+		grid-template-columns: calc(100%/3*2) calc(100%/3*1 - 12px); // 2fr 1fr;
+	}
+
+	> * {
+		background-color: rgba(10,10,10,0.3);
+		color: #fff;
+		padding: 2rem;
+	}
+
+	header {
+		grid-column: 1 / 3;
+		grid-row: 1 / 2;
+	}
+
+	footer {
+		grid-column: 1 / 3;
+		grid-row: 3 / 4;
+	}
+
+	main {
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+	}
+
+	aside {
+		grid-column: 2 / 3;
+		grid-row: 2 / 3;
+
+	}
+}
+
+.grid4 {
+
+	display: grid;
+	grid-gap: 12px;
+
+	@media (min-width: 750px) {
+		grid-template-columns: 2fr 1fr;
+	}
+
+
+	> * {
+		background-color: rgba(10,10,10,0.3);
+		color: #fff;
+		padding: 2rem;
+	}
+
+	&__header {
+		order: 0;
+	}
+
+	&__footer {
+		order: 2;
+	}
+
+	&__sidebar {
+		order: 1;
+	}
+
+	&__content {
+		order: 2;
+		// demo
+		min-height: 300px;
+	}
+
+	&__extra {
+		order: 2;
+	}
+}
+.module {
+
+	@media (min-width: 750px) {
+		display: grid;
+		grid-gap: 12px;
+		grid-template-columns: (100%/3*1) calc(100%/3*2 - 12px);
+
+		&__image {
+			grid-column: 1 / span 1;
+			grid-column-start: 1;
+			grid-column-end: 2;
+			grid-row: 1 / span 2;
+			grid-row-start: 1;
+			grid-row-end: 3;
+
+			min-height: 180px;
+		}
+
+		&__heading {
+			grid-column: 2 / span 1;
+			grid-row: 1 / span 1;
+		}
+
+		&__info {
+			grid-column: 2 / span 1;
+			grid-row: 2 / span 1;
+			align-self: end;
+		}
+
+		&__buttonbar {
+			grid-column: 1 / span 2;
+			grid-row: 3 / span 1;
+		}
+	}
+
+
+	&__image {
+		background-color: #aaa;
+
+		> img {
+			// width: 100%;
+			// height: 100%;
+			// object-fit: cover;
+
+			width: 100%;
+
+			&:before {
+				content: 'image could not be loaded';
+			}
+		}
+	}
+
+	&__kicker {
+		display: block;
+	}
+	&__headline {
+		display: block;
+	}
+	&__info {
+		margin-bottom: 0;
+	}
+}
