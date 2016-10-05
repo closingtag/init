@@ -12,6 +12,9 @@ button > * {
 	pointer-events: none;
 }
 
+*:empty {
+	display: none;
+}
 
 // Add a placeholder for focus events so we can manage
 // both global and button styles.
