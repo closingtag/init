@@ -115,3 +115,13 @@ $jsenhanced:    $medium                !default;
 @include breakpoint-set('default media', 'only all');
 @include breakpoint-set('to ems', true);
 
+// z-indexes vars (demo)
+$z-indexes: (
+	main: (
+		foo,
+		bar,
+		tooltip
+	),
+	header: (),
+	modal: ()
+);
