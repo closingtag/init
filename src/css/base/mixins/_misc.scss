@@ -81,9 +81,15 @@
 	}
 
 	@if ($size) {
-		font-size: rem($size);
-		//margin-bottom: measure-margin($size);
+		@if unit($size) == "px" {
+			font-size: rem($size);
+		} @else if unit($size) != "px" {
+			font-size: $size;
+		}@else {
+			@warn "Not a number value: #{$size}";
+		}
 	}
+
 	@if ($weight) {
 		font-weight: $weight;
 	}
