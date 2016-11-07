@@ -1,7 +1,7 @@
 // style.scss
 @import "master";
 
-$gridgap: 12px;
+$gridgap: 30px;
 
 .bs-grid {
 	box-sizing: border-box;
@@ -23,26 +23,101 @@ $gridgap: 12px;
 	// calc(100%/12 - (#{$gridgap} - (#{$gridgap}/12)));
 
 	grid-template-rows: auto;
-}
 
-.bs-grid1 {
-	display: grid;
-	grid-column-gap: $gridgap;
-	grid-template-columns: repeat(12, 1fr);
-}
-
-@for $i from 1 through 12 {
-	.col#{$i} {
-		grid-column: $i / span 1;
+	[class*="col"] {
+		grid-column: auto / span 1;
 		background-color: rgba(10,10,10,0.3);
 		color: #fff;
 		padding: 1rem;
 		text-align: center;
-		// prevent overflow
-		// max-width: 100%;
-		// overflow: hidden;
 	}
 }
+
+// .bs-grid1 {
+// 	display: grid;
+// 	grid-template-columns: repeat(12, 1fr);
+
+// 	@for $i from 1 through 12 {
+// 		.col#{$i} {
+// 			grid-column: 1 / span $i;
+// 			background-color: rgba(10,10,10,0.3);
+// 			color: #fff;
+// 			padding-left: $gridgap/2;
+// 			padding-right: $gridgap/2;
+// 			text-align: center;
+// 			// prevent overflow
+// 			// max-width: 100%;
+// 			// overflow: hidden;
+// 		}
+// 	}
+// }
+
+$gridgap: 30px;
+$columns: 12;
+
+.bs-grid1 {
+	display: grid;
+	grid-template-columns: repeat($columns, 1fr);
+}
+[class*="col-"] {
+	padding-left: $gridgap/2;
+	padding-right: $gridgap/2;
+	box-shadow: inset 0 0 0 1px black;
+	background-color: rgba(10,10,10,0.3);
+	color: #fff;
+	text-align: center;
+
+	> span {
+		display: none;
+	}
+}
+
+@for $i from 1 through $columns {
+	.col-xs-#{$i} {
+		grid-column: auto / span $i;
+	}
+}
+
+@include breakpoint($medium) {
+	@for $i from 1 through $columns {
+		.col-md-#{$i} {
+			grid-column: auto / span $i;
+		}
+	}
+}
+
+@include breakpoint($large) {
+	@for $i from 1 through $columns {
+		.col-lg-#{$i} {
+			grid-column: auto / span $i;
+		}
+	}
+}
+
+.xs {
+
+	display: block !important;
+
+	@include breakpoint($medium) {
+			display: none !important;
+	}
+}
+
+.md {
+	@include breakpoint($medium) {
+			display: block !important;
+	}
+	@include breakpoint($large) {
+			display: none !important;
+	}
+}
+
+.lg {
+	@include breakpoint($large) {
+			display: block !important;
+	}
+}
+
 
 .bs-grid2 {
 	// demo
@@ -386,4 +461,130 @@ $gridgap: 12px;
 	&__info {
 		margin-bottom: 0;
 	}
+}
+
+
+
+
+
+.wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 12px;
+}
+
+.box {
+	background-color: #444;
+	color: #fff;
+	padding: 1em;
+	font-size: 150%;
+}
+
+.a {
+	grid-column: 1 / span 2;
+	grid-row: 1 / span 1;
+}
+.b {
+	grid-column: 3 / span 1;
+	grid-row: 1 / span 2;
+}
+.c {
+	grid-column: 1 / span 1;
+	grid-row: 2 / span 1;
+}
+.d {
+	grid-column: 2 / span 1;
+	grid-row: 2 / span 1;
+}
+
+//
+
+.grid-container {
+	margin: 2rem;
+}
+
+.item {
+
+	background-color: #444;
+	color: #fff;
+	padding: 1em;
+	font-size: 150%;
+}
+
+
+.item1 {grid-area: item1;}
+.item2 {grid-area: item2;}
+.item3 {grid-area: item3;}
+.item4 {grid-area: item4;}
+.item5 {grid-area: item5;}
+.item6 {grid-area: item6;}
+.item7 {grid-area: item7;}
+.item8 {grid-area: item8;}
+
+.grid-container {
+	display: grid;
+
+	grid-template-columns: repeat(7, 120px);
+	grid-template-rows: repeat(7, 80px);
+	grid-gap: 10px;
+
+	grid-template-areas:
+	".     item1 .     .     .     .     ."
+	"item7 item1 item6 item6 item6 item6 ."
+	"item7 item1 item6 item6 item6 item6 ."
+	"item7 item4 item4 item5 item5 item5 item5"
+	"item7 item4 item4 item2 item2 item3 ."
+	"item8 item4 item4 item2 item2 item3 ."
+	".     item4 item4 .     .     item3 ."
+	;
+}
+
+
+
+// @media (min-width: 550px) {
+// 	.newwrapper {
+// 		display: grid;
+// 		grid-template-columns: 61.9% 38.1%;
+// 	}
+// 	.newmainheader {
+// 		grid-column: 1 / 3; grid-row: 1 / 2;
+// 	}
+// 	.newcontent {
+// 		grid-column: 1 / 2; grid-row: 2 / 3;
+// 	}
+// 	.newaside {
+// 		grid-column: 2 / 3; grid-row: 2 / 3;
+// 	}
+// 	.newmainfooter {
+// 		grid-column: 1 / 3; grid-row: 3 / 4;
+// 	}
+// }
+.newwrapper {
+	display: grid;
+	grid-gap: 1em;
+	grid-template-columns: 61.9% 38.1%;
+	grid-template-areas:
+		"header  header"
+		"content sidebar"
+		"footer  footer";
+
+	> * {
+
+		background-color: #444;
+		color: #fff;
+		padding: 1em;
+		font-size: 150%;
+	}
+}
+.newmainheader {
+	grid-area: header;
+}
+.newcontent {
+	grid-area: content;
+}
+.newpanel {
+	grid-area: sidebar;
+}
+.newmainfooter {
+	grid-area: footer;
 }
