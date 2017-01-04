@@ -199,16 +199,16 @@ $asset-base-path: '../' !default;
 
 
 // z-index calculation function
-//
+
 // Origin: https://codepen.io/stowball/post/sassier-z-index-management-for-complex-layouts
-//
+
 // Demo: http://www.sassmeister.com/gist/f1feaeb8e53cf318f1b7106bb2b152a7
-//
+
 // USAGE:
 // .modal {
-//		z-index: z(modal);
-//	}
-//
+// 	z-index: z(modal);
+// }
+
 @function z-index($key1, $key2: null) {
 	$map: $z-indexes;
 	$found-index: null;
