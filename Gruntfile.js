@@ -9,11 +9,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.initConfig({
-
-		// config
-		devDir: '.tmp',
-		srcDir: 'src',
-		distDir: 'dist',
+		pkg: grunt.file.readJSON('package.json'),
 
 		// imagemin
 		imagemin: {
@@ -26,17 +22,17 @@ module.exports = function(grunt) {
 			dev: {
 				files: [{
 					expand: true,
-					cwd: '<%= devDir %>/img/',
+					cwd: '<%= pkg.folders.devDir %>/<%= pkg.folders.imgDir %>/',
 					src: ['**/*.{png,jpg,gif}'],
-					dest: '<%= devDir %>/img/'
+					dest: '<%= pkg.folders.devDir %>/<%= pkg.folders.imgDir %>/'
 				}]
 			},
 			dist: {
 				files: [{
 					expand: true,
-					cwd: '<%= distDir %>/img/',
+					cwd: '<%= pkg.folders.distDir %>/<%= pkg.folders.imgDir %>/',
 					src: ['**/*.{png,jpg,gif}'],
-					dest: '<%= distDir %>/img/'
+					dest: '<%= pkg.folders.distDir %>/<%= pkg.folders.imgDir %>/'
 				}]
 			}
 		},
@@ -52,9 +48,9 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					cwd: '<%= srcDir %>/css/',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.sassDir %>/',
 					src: ['*.scss','!all-old-ie.scss'],
-					dest: '<%= devDir %>/css',
+					dest: '<%= pkg.folders.devDir %>/<%= pkg.folders.cssDir %>',
 					ext: '.css'
 				}]
 			},
@@ -65,9 +61,9 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					cwd: '<%= srcDir %>/css',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.sassDir %>',
 					src: ['*.scss','!all-old-ie.scss'],
-					dest: '<%= distDir %>/css',
+					dest: '<%= pkg.folders.distDir %>/<%= pkg.folders.cssDir %>',
 					ext: '.css'
 				}]
 			},
@@ -83,13 +79,13 @@ module.exports = function(grunt) {
 				map: {
 					map: true
 				},
-				src: ['<%= devDir%>/css/*.css','!all-old-ie.css']
+				src: ['<%= pkg.folders.devDir%>/<%= pkg.folders.cssDir %>/*.css','!all-old-ie.css']
 			},
 			dist: {
 				map: {
 					map: false
 				},
-				src: ['<%= distDir %>/css/*.css','!all-old-ie.css']
+				src: ['<%= pkg.folders.distDir %>/<%= pkg.folders.cssDir %>/*.css','!all-old-ie.css']
 			}
 		},
 
@@ -97,43 +93,43 @@ module.exports = function(grunt) {
 		sync: {
 			js: {
 				files: [{
-					cwd: '<%= srcDir %>/js',
-					dest: '<%= devDir %>/js',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>',
+					dest: '<%= pkg.folders.devDir %>/<%= pkg.folders.jsDir %>',
 					src: ['**/*.js']
 				}]
 			},
 			jsdist: {
 				files: [{
-					cwd: '<%= srcDir %>/js',
-					dest: '<%= distDir %>/js',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>',
+					dest: '<%= pkg.folders.distDir %>/<%= pkg.folders.jsDir %>',
 					src: ['**/*.js', '!**/_*.js']
 				}]
 			},
 			img: {
 				files: [{
-					cwd: '<%= srcDir %>/img/',
-					dest: '<%= devDir %>/img/',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>/',
+					dest: '<%= pkg.folders.devDir %>/<%= pkg.folders.imgDir %>/',
 					src: ['**/*']
 				}]
 			},
 			imgdist: {
 				files: [{
-					cwd: '<%= srcDir %>/img',
-					dest: '<%= distDir %>/img',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>',
+					dest: '<%= pkg.folders.distDir %>/<%= pkg.folders.imgDir %>',
 					src: ['**/*']
 				}]
 			},
 			fonts: {
 				files: [{
-					cwd: '<%= srcDir %>/fonts/',
-					dest: '<%= devDir %>/fonts/',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.fontsDir %>/',
+					dest: '<%= pkg.folders.devDir %>/<%= pkg.folders.fontsDir %>/',
 					src: ['**/*']
 				}]
 			},
 			fontsdist: {
 				files: [{
-					cwd: '<%= srcDir %>/fonts',
-					dest: '<%= distDir %>/fonts',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.fontsDir %>',
+					dest: '<%= pkg.folders.distDir %>/<%= pkg.folders.fontsDir %>',
 					src: ['**/*']
 				}]
 			}
@@ -144,25 +140,25 @@ module.exports = function(grunt) {
 			dev_js: {
 				files: [{
 					filter: 'isFile',
-					src: ['<%= devDir %>/**/_*.js']
+					src: ['<%= pkg.folders.devDir %>/**/_*.js']
 				}]
 			},
 			dev: {
 				files: [{
 					filter: 'isFile',
-					src: ['<%= devDir %>/**/*', '!<%= devDir %>/**/*.{jpg,png,svg}']
+					src: ['<%= pkg.folders.devDir %>/**/*', '!<%= pkg.folders.devDir %>/**/*.{jpg,png,svg}']
 				}]
 			},
 			dist: {
 				files: [{
 					filter: 'isFile',
-					src: ['<%= distDir %>/**/*', '!<%= distDir %>/**/*.{jpg,png,svg}']
+					src: ['<%= pkg.folders.distDir %>/**/*', '!<%= pkg.folders.distDir %>/**/*.{jpg,png,svg}']
 				}]
 			},
 			distimg: {
 				files: [{
 					filter: 'isFile',
-					src: ['<%= distDir %>/**/*.{jpg,png,svg}']
+					src: ['<%= pkg.folders.distDir %>/**/*.{jpg,png,svg}']
 				}]
 			}
 		},
@@ -195,9 +191,9 @@ module.exports = function(grunt) {
 				],
 				"uglify": true,
 				files: {
-					src: ['<%= srcDir %>/**/*.js','<%= srcDir %>/**/*.scss','!<%= srcDir %>/js/vendor/*.js']
+					src: ['<%= pkg.folders.srcDir %>/**/*.js','<%= pkg.folders.srcDir %>/**/*.scss','!<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/vendor/*.js']
 				},
-				dest: "<%= srcDir %>/js/vendor/_modernizr-custom.js"
+				dest: "<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/vendor/_modernizr-custom.js"
 			}
 		},
 
@@ -236,13 +232,13 @@ module.exports = function(grunt) {
 				options: {
 					'-W015': true
 				},
-				src: ['<%= srcDir %>/js/**/*.js', '!<%= srcDir %>/js/vendor/**/*.js']
+				src: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/**/*.js', '!<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/vendor/**/*.js']
 			},
 			all: {
 				options: {
 					'-W015': true, '-W089':true
 				},
-				src: ['<%= srcDir %>/js/**/*.js', '!<%= srcDir %>/js/vendor/**/*.js']
+				src: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/**/*.js', '!<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/vendor/**/*.js']
 			}
 		},
 
@@ -256,18 +252,18 @@ module.exports = function(grunt) {
 			dev: {
 				files: [{
 					expand: true,
-					cwd: '<%= srcDir %>/js',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>',
 					src: ['**/*.js','!**/_*.js', '!vendor/**/*.js'],
-					dest: '<%= devDir %>/js',
+					dest: '<%= pkg.folders.devDir %>/<%= pkg.folders.jsDir %>',
 					ext: '.js'
 				}]
 			},
 			dist: {
 				files: [{
 					expand: true,
-					cwd: '<%= srcDir %>/js',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>',
 					src: ['**/*.js','!**/_*.js', '!vendor/**/*.js'],
-					dest: '<%= distDir %>/js',
+					dest: '<%= pkg.folders.distDir %>/js',
 					ext: '.js'
 				}]
 			}
@@ -279,23 +275,23 @@ module.exports = function(grunt) {
 				spawn: true
 			},
 			sync_js: {
-				files: ['<%= srcDir %>/js/**/*'],
+				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/**/*'],
 				tasks: ['modernizr:build','sync:js','includes:dev', 'jshint']
 			},
 			img: {
-				files: ['<%= srcDir %>/img/**/*'],
+				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>/**/*'],
 				tasks: ['sync:img']
 			},
 			sass: {
-				files: ['<%= srcDir %>/css/**/*'],
+				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.sassDir %>/**/*'],
 				tasks: ['sass:dev', 'postcss:dev',]
 			},
 			assemble: {
-				files: ['<%= srcDir %>/templates/**/*.hbs', '<%= srcDir %>/templates/data/*.json', '<%= srcDir %>/templates/data/*.yml'],
+				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/**/*.hbs', '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/data/*.json', '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/data/*.yml'],
 				tasks: ['assemble:dev']
 			},
 			svgstore: {
-				files: ['<%= srcDir %>/img/icons/*.svg'],
+				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>/icons/*.svg'],
 				tasks: ['svgstore:dev']
 			}
 		},
@@ -304,12 +300,12 @@ module.exports = function(grunt) {
 		browserSync: {
 			dev: {
 				bsFiles: {
-					src: ['<%= devDir %>/css/*.css','<%= devDir %>/js/**/*.js','<%= devDir %>/*.html']
+					src: ['<%= pkg.folders.devDir %>/<%= pkg.folders.cssDir %>/*.css','<%= pkg.folders.devDir %>/<%= pkg.folders.jsDir %>/**/*.js','<%= pkg.folders.devDir %>/*.html']
 				},
 				options: {
 					watchTask: true,
 					server: {
-						baseDir: '<%= devDir %>',
+						baseDir: '<%= pkg.folders.devDir %>',
 						index: 'overview.html'
 					},
 					ghostMode: false,
@@ -327,18 +323,18 @@ module.exports = function(grunt) {
 		// Configuration for assemble
 		assemble: {
 			options: {
-				data: '<%= srcDir %>/templates/data/**/*.{json,yml}',
-				helpers: ['<%= srcDir %>/templates/helpers/**/*.js'],
+				data: '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/data/**/*.{json,yml}',
+				helpers: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/helpers/**/*.js'],
 				layout: 'default.hbs',
-				layoutdir: '<%= srcDir %>/templates/layouts',
-				partials: ['<%= srcDir %>/templates/partials/**/*.hbs'],
+				layoutdir: '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/layouts',
+				partials: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/partials/**/*.hbs'],
 
 				// Pattern Lab templates
 				// patterns: {
-				// 	atoms: ['<%= srcDir %>/templates/patterns/atoms/**/*.hbs'],
-				// 	molecules: ['<%= srcDir %>/templates/patterns/molecules/**/*.hbs'],
-				// 	organisms: ['<%= srcDir %>/templates/patterns/organisms/**/*.hbs'],
-				// 	templates: ['<%= srcDir %>/templates/patterns/templates/**/*.hbs']
+				// 	atoms: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/patterns/atoms/**/*.hbs'],
+				// 	molecules: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/patterns/molecules/**/*.hbs'],
+				// 	organisms: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/patterns/organisms/**/*.hbs'],
+				// 	templates: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/patterns/templates/**/*.hbs']
 				// }
 			},
 			dev: {
@@ -346,8 +342,8 @@ module.exports = function(grunt) {
 					production: false
 				},
 				files: [{
-					cwd: '<%= srcDir %>/templates/pages/',
-					dest: '<%= devDir %>',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/pages/',
+					dest: '<%= pkg.folders.devDir %>',
 					expand: true,
 					flatten: true,
 					src: ['**/*.hbs']
@@ -358,8 +354,8 @@ module.exports = function(grunt) {
 					production: true
 				},
 				files: [{
-					cwd: '<%= srcDir %>/templates/pages/',
-					dest: '<%= distDir %>/',
+					cwd: '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/pages/',
+					dest: '<%= pkg.folders.distDir %>/',
 					expand: true,
 					flatten: true,
 					src: ['**/*.hbs']
@@ -377,9 +373,9 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					cwd: '<%= distDir %>/js',
+					cwd: '<%= pkg.folders.distDir %>/<%= pkg.folders.jsDir %>',
 					src: ['**/*.js', '!**/_*.js'],
-					dest: '<%= distDir %>/js'
+					dest: '<%= pkg.folders.distDir %>/<%= pkg.folders.jsDir %>'
 				}]
 			}
 		},
@@ -390,9 +386,9 @@ module.exports = function(grunt) {
 			dist: {
 				files: [{
 					expand: true,
-					cwd: '<%= distDir %>/',
+					cwd: '<%= pkg.folders.distDir %>/',
 					src: ['**/*.html'],
-					dest: '<%= distDir %>/'
+					dest: '<%= pkg.folders.distDir %>/'
 				}]
 			}
 		},
@@ -405,16 +401,15 @@ module.exports = function(grunt) {
 					includedemo: true
 				},
 				files: {
-					'<%= devDir %>/img/all.svg': ['<%= srcDir %>/img/icons/*.svg']
+					'<%= pkg.folders.devDir %>/<%= pkg.folders.imgDir %>/all.svg': ['<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>/icons/*.svg']
 				}
 			},
 			dist: {
 				files: {
-					'<%= distDir %>/img/all.svg': ['<%= srcDir %>/img/icons/*.svg']
+					'<%= pkg.folders.distDir %>/<%= pkg.folders.imgDir %>/all.svg': ['<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>/icons/*.svg']
 				}
 			}
 		}
-
 	});
 
 

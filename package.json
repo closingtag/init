@@ -3,6 +3,18 @@
   "version": "0.3.0",
   "description": "Init",
   "main": "index.html",
+  "proxy": "domain.dev",
+  "folders": {
+    "devDir": ".tmp",
+    "srcDir": "src",
+    "distDir": "dist",
+    "sassDir": "css",
+    "cssDir": "css",
+    "imgDir": "img",
+    "jsDir": "js",
+    "templateDir": "templates",
+    "fontsDir": "fonts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
