@@ -2,22 +2,22 @@
 // libsass (v3.2.5)
 // ----
 
-/*! ========================================================================
-
-		QUANTITY QUERIES FOR SASS
-		-------------------------
-		Indrek Paas @indrekpaas
-
-		Inspired by Heydon Pickering's Quantity Queries for CSS
-		http://alistapart.com/article/quantity-queries-for-css
-
-		`str-num()` function by Hugo Giraudel
-
-		09.11.2015 Add 'odd/even' argument support
-		03.10.2015 Remove redundant 'query' from mixin name
-		04.08.2015 Add 'at-least/at-most' support
-
-		========================================================================  */
+// /*! ========================================================================
+//
+// 		QUANTITY QUERIES FOR SASS
+// 		-------------------------
+// 		Indrek Paas @indrekpaas
+//
+// 		Inspired by Heydon Pickering's Quantity Queries for CSS
+// 		http://alistapart.com/article/quantity-queries-for-css
+//
+// 		`str-num()` function by Hugo Giraudel
+//
+// 		09.11.2015 Add 'odd/even' argument support
+// 		03.10.2015 Remove redundant 'query' from mixin name
+// 		04.08.2015 Add 'at-least/at-most' support
+//
+// 		========================================================================  */
 
 
 @mixin quantity($arg) {

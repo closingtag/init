@@ -273,18 +273,18 @@
 
 
 
-/*! ========================================================================
+// ========================================================================
 
-    PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
-    ---------------------------------------------------
-    Indrek Paas @indrekpaas
-
-    Inspired by Mike Riethmuller's Precise control over responsive typography
-    http://madebymike.com.au/writing/precise-control-responsive-typography/
-
-!!! use only with px values
-
-    ========================================================================  */
+//    PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
+//    ---------------------------------------------------
+//    Indrek Paas @indrekpaas
+//
+//    Inspired by Mike Riethmuller's Precise control over responsive typography
+//    http://madebymike.com.au/writing/precise-control-responsive-typography/
+//
+//!!! use only with px values
+//
+//    ========================================================================  //
 
 
 @mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
