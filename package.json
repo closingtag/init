@@ -1,6 +1,6 @@
 {
   "name": "init",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Init",
   "main": "index.html",
   "proxy": "domain.dev",
@@ -15,6 +15,7 @@
     "templateDir": "templates",
     "fontsDir": "fonts"
   },
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
