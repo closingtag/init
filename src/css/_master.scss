@@ -22,13 +22,14 @@
 // modules
 @import "modules/modules";      // modules
 
-
 // DEBUG MODE
 $debug: false;
-@import "base/debug";           // debug CSS
-@import "base/accecss";         // access filter CSS
-@import "base/revenge";         // revenge CSS
 
+@import "debug/accecss";         // access filter CSS
+@import "debug/debug";           // debug CSS
+@import "debug/debugger";        // debugger CSS
+@import "debug/diagnostic";      // diagnostic CSS
+@import "debug/revenge";         // revenge CSS
 
 // MediaQuery-Sync
 head {

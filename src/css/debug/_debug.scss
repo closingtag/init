@@ -1,0 +1,60 @@
+// via inuit.css - https://github.com/csswizardry/inuit.css
+
+@if $debug {
+
+	@include sgs-change("debug", true);
+
+	// find all elements that break viewport / Unintended Body Overflow
+	* {
+		outline: 1px solid red;
+		opacity: 1 !important;
+		visibility: visible !important;
+	}
+
+	/* ======================================
+		MediaQuery-Reporter Styles
+	========================================= */
+
+	body:after {
+		content: "less than #{$tiny}";
+		font-size: 300%;
+		font-weight: bold;
+		position: fixed;
+		bottom: 20px;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		background-color: hsla(1,60%,40%,0.7);
+		color: #fff;
+	}
+	@media only screen and (min-width: $tiny) {
+		body:after {
+			content: "#{$tiny} to #{$small}";
+			background-color: hsla(90,60%,40%,0.7);
+		}
+	}
+	@media only screen and (min-width: $small) {
+		body:after {
+			content: "#{$small} to #{$medium}";
+			background-color: hsla(180,60%,40%,0.7);
+		}
+	}
+	@media only screen and (min-width: $medium) {
+		body:after {
+			content: "#{$medium} to #{$large}";
+			background-color: hsla(270,60%,40%,0.7);
+		}
+	}
+	@media only screen and (min-width: $large) {
+		body:after {
+			content: "#{$large} and up";
+			background-color: hsla(360,60%,40%,0.7);
+		}
+	}
+
+
+
+
+
+
+} /* endif*/

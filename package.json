@@ -1,6 +1,6 @@
 {
   "name": "init",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Init",
   "main": "index.html",
   "proxy": "domain.dev",
@@ -49,7 +49,9 @@
     "grunt-sync": "^0.6.2",
     "jit-grunt": "^0.10.0",
     "postcss-assets": "^4.0.1",
-    "postcss-svg": "^1.0.6"
+    "postcss-reporter": "^3.0.0",
+    "postcss-svg": "^1.0.6",
+    "stylelint": "^7.10.1"
   },
   "dependencies": {
     "imagemin-mozjpeg": "^6.0.0",
