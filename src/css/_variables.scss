@@ -1,13 +1,12 @@
-//@import "base/font-stack";           // load font-stacks
-
+/* stylelint-disable */
 // global variables
-$support-for-ie6: false               !default;
-$support-for-ie7: false               !default;
-$support-for-ie8: false               !default;
+$support-for-ie6: false                !default;
+$support-for-ie7: false                !default;
+$support-for-ie8: false                !default;
 
-$old-ie:          false               !default; // for old IE fallback
-$responsive:      true                !default; // responsive project
-$modernizr:       true                !default; // use modernizr for css
+$old-ie:          false                !default; // for old IE fallback
+$responsive:      true                 !default; // responsive project
+$modernizr:       true                 !default; // use modernizr for css
 
 // customers colors
 $color-brand1:    hsl(329, 100%,  44%) !default;
@@ -107,8 +106,8 @@ $jsenhanced:    $medium                !default;
 @include add-grid(12 at $large);
 
 @include add-gutter(1/6);
-@include add-gutter(.20 at $medium);
-@include add-gutter(.30 at $large);
+@include add-gutter(0.20 at $medium);
+@include add-gutter(0.30 at $large);
 @include add-gutter-style('split');
 
 // breakpoint settings
@@ -125,3 +124,4 @@ $z-indexes: (
 	header: (),
 	modal: ()
 );
+/* stylelint-enable */

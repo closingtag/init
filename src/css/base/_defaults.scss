@@ -2,7 +2,9 @@
  * ====================================================================
  */
 // faster click in WindowsPhone IE
-a[href], button {
+
+a[href],
+button {
 	touch-action: manipulation;
 }
 
@@ -18,10 +20,11 @@ button > * {
 
 // Add a placeholder for focus events so we can manage
 // both global and button styles.
+
 %focus {
-	outline-color:  $focus-color;
-	outline-style:  $focus-style;
-	outline-width:  $focus-width;
+	outline-color: $focus-color;
+	outline-style: $focus-style;
+	outline-width: $focus-width;
 	outline-offset: $focus-offset;
 }
 
@@ -36,8 +39,9 @@ button > * {
 // Suppress the focus outline on links that cannot be accessed via keyboard.
 // This prevents an unwanted focus outline from appearing around elements that
 // might still respond to pointer events.
+
 [tabindex="-1"]:focus {
-	outline: none !important;
+	outline: none !important; /* stylelint-disable-line */
 }
 
 [role="button"] {
@@ -53,16 +57,19 @@ button > * {
 // }
 
 // specify the progress cursor of updating elements
+
 [aria-busy="true"] {
 	cursor: progress;
 }
 
 // specify the pointer cursor of trigger elements
+
 [aria-controls] {
 	cursor: pointer;
 }
 
 // specify the unstyled cursor of disabled, not-editable, or otherwise inoperable elements
+
 [aria-disabled] {
 	cursor: default;
 }
@@ -81,9 +88,11 @@ ol ol {
 	margin-bottom: 0;
 	list-style-type: disc;
 }
+
 ol ol {
 	list-style-type: inherit;
 }
+
 nav a {
 	display: block;
 	text-decoration: none;
@@ -106,7 +115,8 @@ hr {
 		left: none;
 		right: none;
 		bottom: 1px solid $grey;
-	};
+	}
+
 	width: 100%;
 	margin: 1em auto;
 }
@@ -115,12 +125,13 @@ caption {
 	caption-side: bottom;
 }
 
-caption:before,
-caption:after {
+caption::before,
+caption::after {
 	content: "\0020\2014\0020";
 }
 
-th, td {
+th,
+td {
 	border-bottom: 1px solid lighten($color-text, 80%);
 	padding: em(4px) 0;
 	text-align: left;
@@ -132,6 +143,7 @@ th {
 }
 
 table {
+
 	ul {
 		margin: 0;
 		padding-left: 1em;
@@ -148,8 +160,14 @@ label {
 }
 
 // SVG icon support fill color
+
 svg {
-	polygon, path, rect, circle, line {
+
+	polygon,
+	path,
+	rect,
+	circle,
+	line {
 		fill: inherit;
 	}
 }

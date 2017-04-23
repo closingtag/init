@@ -5,24 +5,25 @@
 	border: none;
 	display: inline-block;
 	text-decoration: none;
-	padding: .25em 1em;
+	padding: 0.25em 1em;
 }
 
+// .link-more {
 
-.link-more {
+// }
 
+// .link-totop {
+
+// }
+
+// .link-back {
+
+// }
+
+// .link-to-navigation {
+
+// }
+
+a[href$=".pdf"]::after {
+	content: " (PDF)";
 }
-
-.link-totop {
-
-}
-
-.link-back {
-
-}
-
-.link-to-navigation {
-
-}
-
-a[href$=".pdf"]::after {content: " (PDF)"; }

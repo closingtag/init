@@ -1,8 +1,10 @@
 /* Layout
  * ===================================================================
  */
+
 .container {
 	@extend %clearfix;
+
 	min-height: 100%;
 	margin: 0 auto;
 	max-width: $page-max;
@@ -14,31 +16,31 @@
 	}
 }
 
-//header
-[role="banner"] {
+// //header
+// [role="banner"] {
 
-}
+// }
 
-// content
-[role="main"] {
+// // content
+// [role="main"] {
 
-}
+// }
 
-// aside
-[role="complemetary"] {
+// // aside
+// [role="complemetary"] {
 
-}
+// }
 
-// navigation
-[role="navigation"] {
+// // navigation
+// [role="navigation"] {
 
-}
+// }
 
-//footer
-[role="contentinfo"] {
+// //footer
+// [role="contentinfo"] {
 
-}
+// }
 
-.content {
+// .content {
 
-}
+// }

@@ -9,7 +9,7 @@ $icon-map: (
 );
 
 %icon-base {
-	font-family: 'zenicons';
+	font-family: zenicons;
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -22,29 +22,35 @@ $icon-map: (
 
 @mixin icon($icon-name, $font-size: false, $color: false) {
 	@extend %icon-base;
+
 	@if $font-size {
 		font-size: $font-size;
 	}
+
 	@if $color {
 		color: $color;
 	}
+
 	content: map-get($icon-map, $icon-name);
 }
-
 
 @mixin icon-button($icon-name, $font-size: false, $color: false) {
 	@if $font-size {
 		width: em($font-size);
 		height: em($font-size);
 	}
-	&:before {
+
+	&::before {
 		@extend %icon-base;
+
 		@if $font-size {
 			font-size: $font-size;
 		}
+
 		@if $color {
 			color: $color;
 		}
+
 		content: map-get($icon-map, $icon-name);
 	}
 }

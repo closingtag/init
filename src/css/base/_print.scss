@@ -1,77 +1,77 @@
+/* stylelint-disable declaration-no-important */
 
 /* ==========================================================================
-   Print styles.
-   Inlined to avoid required HTTP connection: h5bp.com/r
-   ========================================================================== */
+ Print styles.
+ Inlined to avoid required HTTP connection: h5bp.com/r
+ ========================================================================== */
 
 @media print {
-    * {
-        background: transparent !important;
-        color: #000 !important; /* Black prints faster: h5bp.com/s */
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
 
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
+	* {
+		background: transparent !important;
+		color: #000000 !important; /* Black prints faster: h5bp.com/s */
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
 
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
 
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
+	a[href]::after {
+		content: " (" attr(href) ")";
+	}
 
-    /*
-     * Don't show links for images, or javascript/internal links
-     */
+	abbr[title]::after {
+		content: " (" attr(title) ")";
+	}
 
-    .ir a:after,
-    a[href^="javascript:"]:after,
-    a[href^="#"]:after {
-        content: "";
-    }
+	/*
+	 * Don't show links for images, or javascript/internal links
+	 */
 
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
+	.ir a::after,
+	a[href^="javascript:"]::after,
+	a[href^="#"]::after {
+		content: "";
+	}
 
-    thead {
-        display: table-header-group; /* h5bp.com/t */
-    }
+	pre,
+	blockquote {
+		border: 1px solid #999999;
+		page-break-inside: avoid;
+	}
 
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
+	thead {
+		display: table-header-group; /* h5bp.com/t */
+	}
 
-    img {
-        max-width: 100% !important;
-    }
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
 
-    @page {
-        margin: 0.5cm;
-    }
+	img {
+		max-width: 100% !important;
+	}
 
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
+	@page {
+		margin: 0.5cm;
+	}
 
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
 
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
 
-
-    /* edits for print page */
-
+	/* edits for print page */
 }
+/* stylelint-enable declaration-no-important */

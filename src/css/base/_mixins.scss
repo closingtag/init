@@ -2,12 +2,8 @@
 @import "mixins/functions";
 @import "mixins/hidpi";
 @import "mixins/fixed-ratiobox";
-
 @import "mixins/rem";
 @import "mixins/modernizr-mixins";
-
-
-
 
 @mixin smoothscroll($axis:y) {
 	overflow-#{$axis}: scroll; // has to be scroll, not auto

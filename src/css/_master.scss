@@ -32,26 +32,33 @@ $debug: false;
 @import "debug/revenge";         // revenge CSS
 
 // MediaQuery-Sync
+
 head {
 	@include breakpoint($tiny) {
-		font-family: tiny-1;
+		font-family: "tiny-1";
 	}
+
 	@include breakpoint($small) {
-		font-family: small-2;
+		font-family: "small-2";
 	}
+
 	@include breakpoint($medium) {
-		font-family: medium-3;
+		font-family: "medium-3";
 	}
+
 	@include breakpoint($large) {
-		font-family: large-4;
+		font-family: "large-4";
 	}
+
 	@include breakpoint($xlarge) {
-		font-family: xlarge-5;
+		font-family: "xlarge-5";
 	}
+
 	@include breakpoint($xxlarge) {
-		font-family: xxlarge-6;
+		font-family: "xxlarge-6";
 	}
+
 	@include breakpoint($huge) {
-		font-family: huge-7;
+		font-family: "huge-7";
 	}
 }

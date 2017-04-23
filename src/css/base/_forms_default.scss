@@ -3,15 +3,19 @@
  */
 
 // form defaults
+
 form {
-	ol, ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+
+	ol,
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
 	}
+
 	li {
-	clear: both;
-	padding: 0;
+		clear: both;
+		padding: 0;
 	}
 }
 
@@ -24,38 +28,46 @@ form {
 	clear: none;
 
 	input {
-	box-sizing: border-box;
-	width: 100%
+		box-sizing: border-box;
+		width: 100%;
 	}
 }
 
 .full {
 	width: 100%;
 }
+
 .wide {
 	width: 73%;
 }
+
 .wide + .small {
 	margin-left: 4%;
 }
+
 .half {
 	width: 48%;
 }
+
 .half + .half {
 	margin-left: 4%;
 }
+
 .half:nth-child(2n) {
 	margin-left: 0;
 }
+
 .half.nl {
 	float: none;
 	clear: both;
 	margin-left: 0;
 }
+
 .small {
 	width: 23%;
 	font-size: 1em;
 }
+
 .small + .wide {
 	margin-left: 4%;
 }
@@ -82,7 +94,6 @@ form {
 //   width: 100%;
 // }
 
-
 $form_placeholder_prefixes: (
 	'::-webkit-input-placeholder',
 	':-moz-placeholder',
@@ -91,6 +102,7 @@ $form_placeholder_prefixes: (
 	'::-ms-input-placeholder',
 	'::placeholder',
 	':placeholder-shown' );
+
 @each $prefix in $form_placeholder_prefixes {
 
 	input[placeholder]#{$prefix},
@@ -99,13 +111,12 @@ $form_placeholder_prefixes: (
 		opacity: 1;
 		text-overflow: ellipsis;
 	}
+
 	input[placeholder]:focus#{$prefix},
 	textarea[placeholder]:focus#{$prefix} {
-		color: transparent !important;
+		color: transparent !important; /* stylelint-disable-line */
 	}
 }
-
-
 
 fieldset {
 
@@ -120,6 +131,7 @@ fieldset {
 	&.options {
 		margin: 0 4%;
 	}
+
 	&.half + .half {
 		margin-left: 4%;
 	}
@@ -140,6 +152,7 @@ label {
 
 	.label {
 		@extend label;
+
 		display: block;
 		cursor: inherit;
 		text-align: right;
@@ -152,7 +165,6 @@ label {
 	}
 }
 
-//[type="submit"]
 [type="text"],
 [type="number"],
 [type="tel"],
@@ -170,7 +182,6 @@ button {
 	border: 1px solid $grey;
 	color: $black;
 	background-color: $white;
-
 	border-radius: 0;
 	box-shadow: none;
 	line-height: 1.3;
@@ -187,18 +198,18 @@ textarea {
 		color: $black;
 		outline: none;
 
-		@if($old-ie) {
+		@if ($old-ie) {
 			outline: 1px solid $darkgrey;
 		}
 	}
 }
-
 
 button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
 	@extend %reset-button;
+
 	display: inline-block;
 	//vertical-align: middle;
 }
@@ -209,7 +220,7 @@ button,
 
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
+	-webkit-appearance: none; /* stylelint-disable-line */
 	margin: 0;
 }
 
@@ -247,9 +258,6 @@ legend.label + [type="checkbox"] {
 
 select {
 	width: inherit;
-
-	-moz-appearance: none;    // Firefox 40+
-	-webkit-appearance: none; // Chrome 45+
 	appearance: none;
 
 	&::-ms-expand {
@@ -288,7 +296,7 @@ option {
 		border-color: $color-alert;
 		border-radius: 0;
 
-		@if($old-ie) {
+		@if ($old-ie) {
 			outline: 1px solid $color-alert;
 		}
 	}
