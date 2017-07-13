@@ -73,7 +73,7 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					processors: [
-						require('autoprefixer')
+						require('autoprefixer')({grid: true})
 					]
 				},
 				map: {
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
 			dist: {
 				options: {
 					processors: [
-						require('autoprefixer')
+						require('autoprefixer')({grid: true})
 					]
 				},
 				map: {
@@ -434,10 +434,54 @@ module.exports = function(grunt) {
 					'<%= pkg.folders.distDir %>/<%= pkg.folders.imgDir %>/all.svg': ['<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>/icons/*.svg']
 				}
 			}
-		}
+		},
+
+		// concurrent: {
+		// 	task1: ['responsive_images:headerimagesdev','sass:dev', 'svgstore:dev', 'js'],
+		// 	task2: ['responsive_images:sliderimagesdev','postcss:dev', 'sync:img', 'sync:fonts', 'assemble:dev'],
+		// 	task3: ['responsive_images:headerimagesdev', 'responsive_images:sliderimagesdev']
+		// }
 	});
 
 
+/////////////
+// TASKS
+/////////////
+
+grunt.registerTask('respimgdist', [
+	'responsive_images:headerimagesdist',
+	'responsive_images:sliderimagesdist',
+	'imagemin:dist',
+	]
+);
+
+grunt.registerTask('js', [
+	'modernizr:build',
+	'sync:js',
+	'includes:dev'
+	]
+);
+
+// default / development task
+grunt.registerTask('default', [
+	'clean:dev',
+	//'concurrent:task3',
+	'concurrent:task1',
+	'concurrent:task2',
+	'browserSync',
+	'watch'
+]);
+
+
+// default / development task
+// grunt.registerTask('default', [
+// 	'clean:dev',
+// 	//'concurrent:task3',
+// 	'concurrent:task1',
+// 	'concurrent:task2',
+// 	'browserSync',
+// 	'watch'
+// ]);
 	/////////////
 	// TASKS
 	/////////////
