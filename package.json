@@ -17,11 +17,12 @@
   },
   "browserslist": [
     "last 2 versions",
-    "ie >= 9",
+    "ie >= 11",
     "Android >= 4.4",
     "iOS > 8",
     "Firefox ESR",
-    "> 2%"
+    "> 2%",
+    "not bb < 10"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,14 +31,14 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "assemble": "0.4.42",
-    "autoprefixer": "^6.7.5",
+    "autoprefixer": "^7.1.2",
     "grunt": "^1.0.1",
     "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-imagemin": "^2.0.1",
     "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-uglify": "^2.1.0",
+    "grunt-contrib-uglify": "^3.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-includes": "^1.0.0",
     "grunt-modernizr": "^1.0.2",
@@ -49,13 +50,14 @@
     "grunt-sync": "^0.6.2",
     "jit-grunt": "^0.10.0",
     "postcss-assets": "^4.0.1",
-    "postcss-reporter": "^3.0.0",
-    "postcss-svg": "^1.0.6",
-    "stylelint": "^7.10.1"
+    "postcss-reporter": "^4.0.0",
+    "postcss-svg": "^2.1.0",
+    "stylelint": "^7.13.0"
   },
   "dependencies": {
     "imagemin-mozjpeg": "^6.0.0",
     "imagemin-pngcrush": "^5.0.0",
-    "imagemin-pngquant": "^5.0.0"
+    "imagemin-pngquant": "^5.0.0",
+    "stylelint-config-standard": "^16.0.0"
   }
 }
