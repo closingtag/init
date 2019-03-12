@@ -124,4 +124,20 @@ $z-indexes: (
 	header: (),
 	modal: ()
 );
+
+// spacing
+$space-unit: 4px;
+
+$space-xxs:  $space-unit * 1;
+$space-xs:   $space-unit * 2;
+$space-s:    $space-unit * 3;
+$space-m:    $space-unit * 4;
+$space-l:    $space-unit * 6;
+$space-xl:   $space-unit * 8;
+$space-xxl:  $space-unit * 12;
+
+//$component-padding: $space-m;
+
 /* stylelint-enable */
+
+

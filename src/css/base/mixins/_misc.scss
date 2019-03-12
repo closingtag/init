@@ -32,15 +32,15 @@
 }
 
 
-@mixin vh() {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+@mixin vh($mode: null){
+  position: if($mode, initial, absolute);
+  width: if($mode, initial, 1px);
+  height: if($mode, initial, 1px);
+  padding: if($mode, initial, 0);
+  margin:  if($mode, initial, -1px);
+  overflow: if($mode, initial, hidden);
+  clip: if($mode, initial, rect(0,0,0,0));
+  border: if($mode, initial, 0);
 
   &.focusable {
     &:active, &:focus {
@@ -274,35 +274,34 @@
 
 
 // ========================================================================
-
-//    PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
-//    ---------------------------------------------------
-//    Indrek Paas @indrekpaas
+// PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
+// ---------------------------------------------------
+// Indrek Paas @indrekpaas
 //
-//    Inspired by Mike Riethmuller's Precise control over responsive typography
-//    http://madebymike.com.au/writing/precise-control-responsive-typography/
+// Inspired by Mike Riethmuller's Precise control over responsive typography
+// http://madebymike.com.au/writing/precise-control-responsive-typography/
 //
 //!!! use only with px values
 //
-//    ========================================================================  //
+// usage:
+//
+// h1 {
+//   @include fluid-type(24px, 32px);
+// }
+//
+// h2 {
+//   @include fluid-type(16px, 24px, 400px, 900px);
+// }
+// ========================================================================  //
 
+@mixin fluid-type($min-value, $max-value, $min-vw: $medium, $max-vw: $xlarge) {
+	font-size: rem($min-value);
 
-@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
-  & {
-    @each $property in $properties {
-      #{$property}: $min-value;
-    }
+	@include breakpoint($min-vw) {
+		font-size: calc(#{$min-value} + #{strip-units($max-value - $min-value)} * ((100vw - #{$min-vw}) / #{strip-units($max-vw - $min-vw)}));
+	}
 
-    @include breakpoint($min-vw) {
-      @each $property in $properties {
-        #{$property}: calc(#{$min-value} + #{strip-units($max-value - $min-value)} * ((100vw - #{$min-vw}) / #{strip-units($max-vw - $min-vw)}));
-      }
-    }
-
-    @include breakpoint($max-vw) {
-      @each $property in $properties {
-        #{$property}: $max-value;
-      }
-    }
-  }
+	@include breakpoint($max-vw) {
+		font-size: rem($max-value);
+	}
 }

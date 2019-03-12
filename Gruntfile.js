@@ -1,4 +1,7 @@
 'use strict';
+const sass = require('node-sass');
+const path = require('path');
+
 module.exports = function(grunt) {
 	var mozjpeg  = require('imagemin-mozjpeg');
 	var pngquant = require('imagemin-pngquant');
@@ -42,6 +45,7 @@ module.exports = function(grunt) {
 		sass: {
 			dev: {
 				options: {
+					implementation: sass,
 					outputStyle: 'expanded',
 					sourceMap: true,
 					sourceMapContents: true
@@ -70,28 +74,25 @@ module.exports = function(grunt) {
 		},
 
 		postcss: {
+
+			options: {
+				processors: [
+					require('autoprefixer')({grid: true})
+				]
+			},
 			dev: {
-				options: {
-					processors: [
-						require('autoprefixer')({grid: true})
-					]
-				},
 				map: {
 					map: true
 				},
 				src: ['<%= pkg.folders.devDir%>/<%= pkg.folders.cssDir %>/*.css','!all-old-ie.css']
 			},
 			dist: {
-				options: {
-					processors: [
-						require('autoprefixer')({grid: true})
-					]
-				},
 				map: {
 					map: false
 				},
 				src: ['<%= pkg.folders.distDir %>/<%= pkg.folders.cssDir %>/*.css','!all-old-ie.css']
 			},
+
 			lint: {
 				options: {
 					writeDest: false,
@@ -112,6 +113,7 @@ module.exports = function(grunt) {
 					'!<%= pkg.folders.srcDir%>/<%= pkg.folders.cssDir %>/base/_normalize-legacy.scss',
 					'!all-old-ie.scss']
 			}
+
 		},
 
 		// sync
@@ -309,7 +311,8 @@ module.exports = function(grunt) {
 			},
 			sass: {
 				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.sassDir %>/**/*'],
-				tasks: ['postcss:lint', 'sass:dev', 'postcss:dev']
+				//tasks: ['postcss:lint', 'sass:dev', 'postcss:dev']
+				tasks: ['sass:dev', 'postcss:dev']
 			},
 			assemble: {
 				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/**/*.hbs', '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/data/*.json', '<%= pkg.folders.srcDir %>/<%= pkg.folders.templateDir %>/data/*.yml'],
@@ -496,7 +499,7 @@ grunt.registerTask('default', [
 	// default / development task
 	grunt.registerTask('default', [
 		'clean:dev',
-		'postcss:lint',
+		//'postcss:lint',
 		'sass:dev',
 		'postcss:dev',
 		'svgstore:dev',
@@ -512,7 +515,7 @@ grunt.registerTask('default', [
 	grunt.registerTask('dist', [
 		'clean:dist',
 		'sync:fontsdist',
-		'postcss:lint',
+		//'postcss:lint',
 		'sass:dist',
 		'postcss:dist',
 		'modernizr:build',

@@ -12,6 +12,19 @@
 	}
 }
 
+@supports (display: flow-root) {
+	.clearfix {
+		display: flow-root;
+	}
+}
+@supports not (display: flow-root) {
+	.clearfix::after {
+		content: "";
+		clear: both;
+		display: block;
+	}
+}
+
 %ir {
 	text-indent: 110%;
 	white-space: nowrap;

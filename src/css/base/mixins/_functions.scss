@@ -43,11 +43,11 @@
 // Source: http://hugogiraudel.com/2013/08/12/sass-functions/#mapping
 @function match($haystack, $needle) {
 	@each $item in $haystack {
-	$index: index($item, $needle);
-	@if $index {
-		$return: if($index == 1, 2, $index);
-		@return nth($item, $return);
-	}
+		$index: index($item, $needle);
+		@if $index {
+			$return: if($index == 1, 2, $index);
+			@return nth($item, $return);
+		}
 	}
 	@return false;
 }
@@ -205,8 +205,9 @@ $asset-base-path: '../' !default;
 // Demo: http://www.sassmeister.com/gist/f1feaeb8e53cf318f1b7106bb2b152a7
 
 // USAGE:
+//
 // .modal {
-// 	z-index: z(modal);
+//   z-index: z(modal);
 // }
 
 @function z-index($key1, $key2: null) {

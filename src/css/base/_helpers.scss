@@ -21,6 +21,10 @@
 	@include vh();
 }
 
+.unvh {
+	@include vh(reset);
+}
+
 .invisible {
 	visibility: hidden;
 }
@@ -52,8 +56,4 @@ textarea {
 
 .highlight {
 	color: $color-highlight;
-}
-
-.copyright {
-	margin-bottom: 0;
 }
