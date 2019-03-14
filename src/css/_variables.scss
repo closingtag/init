@@ -62,7 +62,6 @@ $focus: $focus-width $focus-style $focus-color !default;
 $font-main:       sans-serif           !default;
 $font-alternate:  serif                !default;
 $webfont:         false                !default;
-$font-icon:       'iconfont'           !default;
 $base-fontsize:   16px                 !default;
 $base-lineheight: 1.5                  !default;
 $base-height:     $base-fontsize * $base-lineheight !default;
@@ -136,7 +135,7 @@ $space-l:    $space-unit * 6;
 $space-xl:   $space-unit * 8;
 $space-xxl:  $space-unit * 12;
 
-//$component-padding: $space-m;
+$component-padding: $space-m;
 
 /* stylelint-enable */
 

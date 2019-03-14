@@ -1,15 +1,10 @@
 'use strict';
 const sass = require('node-sass');
-const path = require('path');
 
 module.exports = function(grunt) {
 	var mozjpeg  = require('imagemin-mozjpeg');
 	var pngquant = require('imagemin-pngquant');
 	var pngcrush = require('imagemin-pngcrush');
-
-	require('jit-grunt')(grunt, {
-		assemble: 'assemble'
-	});
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -60,6 +55,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				options: {
+					implementation: sass,
 					outputStyle: 'compressed',
 					sourceMap: false
 				},
@@ -303,7 +299,7 @@ module.exports = function(grunt) {
 			},
 			sync_js: {
 				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.jsDir %>/**/*'],
-				tasks: ['modernizr:build','sync:js','includes:dev', 'jshint']
+				tasks: ['sync:js','includes:dev', 'jshint']
 			},
 			img: {
 				files: ['<%= pkg.folders.srcDir %>/<%= pkg.folders.imgDir %>/**/*'],
@@ -446,34 +442,49 @@ module.exports = function(grunt) {
 		// }
 	});
 
+grunt.loadNpmTasks('grunt-assemble');
+grunt.loadNpmTasks('grunt-browser-sync');
+grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks('grunt-contrib-imagemin');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-includes');
+grunt.loadNpmTasks('grunt-newer');
+grunt.loadNpmTasks('grunt-postcss');
+grunt.loadNpmTasks('grunt-processhtml');
+grunt.loadNpmTasks('grunt-sass');
+grunt.loadNpmTasks('grunt-svgstore');
+grunt.loadNpmTasks('grunt-sync');
 
 /////////////
 // TASKS
 /////////////
 
-grunt.registerTask('respimgdist', [
-	'responsive_images:headerimagesdist',
-	'responsive_images:sliderimagesdist',
-	'imagemin:dist',
-	]
-);
+// grunt.registerTask('respimgdist', [
+// 	'responsive_images:headerimagesdist',
+// 	'responsive_images:sliderimagesdist',
+// 	'imagemin:dist',
+// 	]
+// );
 
-grunt.registerTask('js', [
-	'modernizr:build',
-	'sync:js',
-	'includes:dev'
-	]
-);
+// grunt.registerTask('js', [
+// 	//'modernizr:build',
+// 	'sync:js',
+// 	'includes:dev'
+// 	]
+// );
 
-// default / development task
-grunt.registerTask('default', [
-	'clean:dev',
-	//'concurrent:task3',
-	'concurrent:task1',
-	'concurrent:task2',
-	'browserSync',
-	'watch'
-]);
+// // default / development task
+// grunt.registerTask('default', [
+// 	'clean:dev',
+// 	//'concurrent:task3',
+// 	'concurrent:task1',
+// 	'concurrent:task2',
+// 	'browserSync',
+// 	'watch'
+// ]);
 
 
 // default / development task
@@ -485,12 +496,11 @@ grunt.registerTask('default', [
 // 	'browserSync',
 // 	'watch'
 // ]);
-	/////////////
-	// TASKS
-	/////////////
+
+
 
 	grunt.registerTask('js', [
-		'modernizr:build',
+		//'modernizr:build',
 		'sync:js',
 		'includes:dev',
 		'jshint'
@@ -518,7 +528,7 @@ grunt.registerTask('default', [
 		//'postcss:lint',
 		'sass:dist',
 		'postcss:dist',
-		'modernizr:build',
+		//'modernizr:build',
 		'sync:jsdist',
 		'includes:dist',
 		'uglify:dist',
